@@ -14,3 +14,8 @@ Roles
 - Will make a database to store information from the APIs
 - Will make a database to store the decks made from the users
 - Will make a database to store the users information
+
+Description
+----------------------------------
+An online card game with similar ideas to Hearthstone.
+Cards will be NHL players or pokemons
