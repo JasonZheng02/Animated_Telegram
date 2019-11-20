@@ -10,64 +10,17 @@ import os
 ################################################################################################################
 app = Flask(__name__)
 
-app.secret_key = os.urandom(32)
-#some helpful global variables
-message = ""
-loggedin = False
-lastRoute = "/"
-editID = -1
-
-def rend_temp(template, mess):
-    global message
-    if (mess != ""):
-        message = ""
-        return render_template(template, m = mess)
-    return render_template(template)
-
-
-
-@app.route("/", methods=['GET', 'POST'])
+@app.route("/")
 def login():
-    global lastRoute
-    global loggedin
-    loggedin = False
-    lastRoute = "/"
-    with sqlite3.connect(DB_FILE) as db:
-        c = db.cursor()
-        c.execute("SELECT * FROM userdata")
-        valid = c.fetchall()
-        if("username" in session and "password" in session):
-            if (session["username"], session["password"]) in valid:
-                loggedin = True
-                return redirect("/Main")
-                #check if the credentials are in our userdatabase, if so they log in
-    return rend_temp("login.html", message)
+    return render_template("login.html")
 
-##check if the user entered a valid combo of username and passwor
-@app.route("/loginHelper", methods=['GET', 'POST'])
-def helper():
-    global message
-    global loggedin
-    if (len(request.args) == 0): return redirect(lastRoute)
-    with sqlite3.connect(DB_FILE) as db:
-        c = db.cursor()
-        c.execute("SELECT * FROM userdata")
-        valid = c.fetchall()
-        if (request.args["username"], request.args["password"]) in valid:
-            session["username"] = request.args["username"]
-            session["password"] = request.args["password"]
-            loggedin = True
-            return redirect("/Main")
-        # if (session["username"], session["password"]) in valid:
-        #     return redirect("/Main")
-        message = "Username or password incorrect."
-        return redirect("/")
+@app.route("/main")
+def main():
+    return render_template("main.html")
 
-@app.route("/Register", methods=['GET', 'POST'])
-def Register():
-    global lastRoute
-    lastRoute = "/Register"
-    return rend_temp("register.html", message)
+@app.route("/register")
+def register():
+    return render_template("register.html")
 
 if __name__ == "__main__":
 	app.debug = True
