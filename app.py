@@ -22,7 +22,7 @@ def Login():
                 loggedin = True
                 return redirect("/Main")
                 #check if the credentials are in our userdatabase, if so they log in
-    return rend_temp("LoginPage.html", message)
+    return rend_temp("login.html", message)
 
 ##check if the user entered a valid combo of username and passwor
 @app.route("/loginHelper", methods=['GET', 'POST'])
