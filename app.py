@@ -6,16 +6,6 @@
 from flask import Flask, render_template, request, session, url_for, redirect
 import sqlite3
 import os
-#DATABASE SETUP
-DB_FILE = "database/databases.db"
-db = sqlite3.connect(DB_FILE)
-c = db.cursor()
-c.execute(''' SELECT count(name) FROM sqlite_master WHERE type='table' AND name='userdata' ''')
-if c.fetchone()[0] < 1:
-    c.execute("CREATE TABLE userdata (user TEXT, pass TEXT);")
-c.execute(''' SELECT count(name) FROM sqlite_master WHERE type='table' AND name='blogdata' ''')
-
-
 
 ################################################################################################################
 app = Flask(__name__)
@@ -37,7 +27,7 @@ def rend_temp(template, mess):
 
 
 @app.route("/", methods=['GET', 'POST'])
-def Login():
+def login():
     global lastRoute
     global loggedin
     loggedin = False
