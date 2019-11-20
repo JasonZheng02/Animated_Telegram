@@ -20,4 +20,16 @@ def createTable():
     db.close()  #close database
 
 
-createTable()
+def tester1():
+
+    #pip install -r req.txt
+    #SELECT * FROM users WHERE password='password';
+    
+    DB_FILE="../database/databases.db"
+    db = sqlite3.connect(DB_FILE)
+    c = db.cursor()
+
+    command = ""
+
+    db.commit() #save changes
+    db.close()  #close database
