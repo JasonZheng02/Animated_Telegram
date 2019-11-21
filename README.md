@@ -19,3 +19,8 @@ Description
 ----------------------------------
 An online card game with similar ideas to Hearthstone.
 Cards will be NHL players or pokemons
+
+
+Launch Instructions
+----------------------------------
+pip install -r requirements.txt
