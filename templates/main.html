@@ -1,5 +1,12 @@
 {% extends "base.html" %}
-{% block title %} Main {% endblock %}
+{% block title %} Main Page {% endblock %}
 {% block body %}
 <h1> Main Page </h1>
+    <form action = "/chooseDeck">
+      <input type="submit" value="Play">
+    </form>
+
+    <form action = "/makeDeck">
+      <input type="submit" value="Make New Deck">
+    </form>
 {% endblock %}
