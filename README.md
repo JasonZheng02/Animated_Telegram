@@ -23,17 +23,17 @@ Cards will be NHL players or pokemons
 List of APIs:
 ----------------------------------
 Deck of Cards API:
-	No quota
-	Used to shuffle decks, make decks, add to decks etc
-  https://docs.google.com/document/d/1oCJhl-NoNNpekMLd4C4jBXhpL9xvm6ZrVIdfoqbq-Vc/edit
+- No quota
+- Used to shuffle decks, make decks, add to decks etc
+- https://docs.google.com/document/d/1oCJhl-NoNNpekMLd4C4jBXhpL9xvm6ZrVIdfoqbq-Vc/edit
 NHL API:
-	No quota
-	Stats on hockey players that will be converted into in game stats
-  https://docs.google.com/document/d/1_CkEqysrBYJQ7XZBEWMpMrWhCQb0HPMPLGLknhnDtsA/edit
+- No quota
+- Stats on hockey players that will be converted into in game stats
+- https://docs.google.com/document/d/1_CkEqysrBYJQ7XZBEWMpMrWhCQb0HPMPLGLknhnDtsA/edit
 PokeAPI:
-	Limit of 100 API requests per IP address per minute
-	Stats on Pokemon that will be converted into in game stats
-  https://docs.google.com/document/d/1hMbL36d5qqFLfufHOqUMWwraWFudfJdekqp6urex0KU/edit
+- Limit of 100 API requests per IP address per minute
+- Stats on Pokemon that will be converted into in game stats
+- https://docs.google.com/document/d/1hMbL36d5qqFLfufHOqUMWwraWFudfJdekqp6urex0KU/edit
 
 How to Run
 ----------------------------------
