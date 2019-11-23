@@ -20,18 +20,19 @@ def createTable():
 def login(user_username, user_password):
     # RETURNS:
     # valid userID.
-    # If DNE, return -1
+    # If doesn't exist, return -1
     #==============
-    DB_FILE="../database/databases.db"
+    DB_FILE="databases.db"
     db = sqlite3.connect(DB_FILE)
     c = db.cursor()
+    num = -1
     findUser = "SELECT * FROM users WHERE username='" + user_username + "' and password='" + user_password + "';"
     data = c.execute(findUser) # returns user's data
     for row in data:
-        print(row[0])
+        num = row[0]
     db.commit() #save changes
     db.close()  #close database
-
+    return(num)
 
 def register(user_username, user_password1, user_password2):
     # RETURNS:
