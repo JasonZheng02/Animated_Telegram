@@ -7,7 +7,7 @@ import sqlite3
 import csv
 
 def createTable():
-    DB_FILE="../database/databases.db"
+    DB_FILE="database/databases.db"
     db = sqlite3.connect(DB_FILE)
     c = db.cursor()
     # Creates the user database: username|password|decks
@@ -22,7 +22,7 @@ def login(user_username, user_password):
     # valid userID.
     # If doesn't exist, return -1
     #==============
-    DB_FILE="databases.db"
+    DB_FILE="database/databases.db"
     db = sqlite3.connect(DB_FILE)
     c = db.cursor()
     num = -1
@@ -42,7 +42,7 @@ def register(user_username, user_password1, user_password2):
     # if valid returns userID
     #==============
     # checks if username exists or passwords incorrect then makes new user
-    DB_FILE="databases.db"
+    DB_FILE="database/databases.db"
     db = sqlite3.connect(DB_FILE)
     c = db.cursor()
     #USERNAME EXISTS?
@@ -69,6 +69,8 @@ def register(user_username, user_password1, user_password2):
     db.commit() #save changes
     db.close()  #close database
     return(num)
+
+
 
 #createTable()
 #register('admin', 'admin', 'admin')

@@ -10,15 +10,15 @@
 </head>
 <div style ="background:white; text-align:center" class="jumbotron jumbotron-fluid" >
 <h1> Login Page </h1>
-<form>
+<form action='/login', method="POST">
   <div class="form-group">
     <label>Username</label>
-    <input type="username"  placeholder="Enter Username" style="width:300px; ">
+    <input type="username"  placeholder="Enter Username" style="width:300px;" name="username">
 
   </div>
   <div class="form-group">
     <label>Password</label>
-    <input type="password" placeholder="Password" style="width:300px; ">
+    <input type="password" placeholder="Password" style="width:300px;" name="password">
     <small  class="form-text text-muted">Funny usernames get 10 bucks.</small>
   </div>
   <div class="form-check">
@@ -26,8 +26,11 @@
     <label class="form-check-label" for="exampleCheck1">Check me out</label>
   </div>
   <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+<br>
+<form action='/register', method="POST">
+  <button type="submit" class="btn btn-warning">Don't have an account?</button>
 </form>
-  <a href = "\register"> Don't have an account?  </a>
 </div>
 
 {% endblock %}

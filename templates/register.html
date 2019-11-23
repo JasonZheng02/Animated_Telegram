@@ -3,17 +3,18 @@
 {% block body %}
 
 <h1> Register Page </h1>
-  <form action = "/">
+    {{errorMessage}}<br>
+  <form action='/register', method="POST">
     Username:<br>
     <input type="text" name="username"><br>
     Password:<br>
-    <input type="password" name="password"><br>
+    <input type="password" name="password1"><br>
     Repeat Password:<br>
-    <input type="password" name="repeat"><br>
+    <input type="password" name="password2"><br>
     <input type="submit" value="Create Account">
   </form>
 
-  <form action = "/">
+  <form action = "/login", method="POST">
     <input type="submit" value = "Back to Login Page">
   </form>
 {% endblock %}
