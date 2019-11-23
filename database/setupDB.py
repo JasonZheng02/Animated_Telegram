@@ -10,17 +10,18 @@ def createTable():
     DB_FILE="../database/databases.db"
     db = sqlite3.connect(DB_FILE)
     c = db.cursor()
-
     # Creates the user database: username|password|decks
     command = "CREATE TABLE IF NOT EXISTS users (userID INTEGER, username TEXT, password TEXT NOT NULL, PRIMARY KEY (userID, username));"
     c.execute(command)
-
     db.commit() #save changes
     db.close()  #close database
 
 
 def login(user_username, user_password):
-    # returns userID. If DNE, return -1
+    # RETURNS:
+    # valid userID.
+    # If DNE, return -1
+    #==============
     DB_FILE="../database/databases.db"
     db = sqlite3.connect(DB_FILE)
     c = db.cursor()
@@ -33,26 +34,40 @@ def login(user_username, user_password):
 
 
 def register(user_username, user_password1, user_password2):
+    # RETURNS:
+    # -1 for existing username
+    # -2 for passwords do not match
+    # -3 for password not over 5 characters
+    # if valid returns userID
+    #==============
     # checks if username exists or passwords incorrect then makes new user
-    DB_FILE="../database/databases.db"
+    DB_FILE="databases.db"
     db = sqlite3.connect(DB_FILE)
     c = db.cursor()
-    #check username existence
-    checkUsername = "SELECT * FROM users WHERE username='" + user_username + "';"
+    #USERNAME EXISTS?
+    checkUsername = "SELECT username FROM users WHERE username='" + user_username + "';"
     data = c.execute(checkUsername)
     for row in data:
         if (user_username == row[0]):
-            print(False)
-    #check password match
+            return(-1)
+    # PASSWORDS MATCH?
     if (user_password1 != user_password2):
-        print(False)
-    #add user
-    
-    addUser = "INSERT INTO users VALUES (\'user_username\', \'user_password1\');"
-    data = c.execute(addUser)
-    getUserID = "SELECT userID FROM users WHERE username=\'user_username\';"
-    print(getUserID)
+        return(-2)
+    # PASSWORD LENGTH?
+    if (len(user_password1) < 5):
+        return(-3)
+    # ADD USER TO DATABASE !
+    getNextID = "SELECT userID FROM users;"
+    data = c.execute(getNextID)
+    num = 1;
+    for ID in data:
+        num += 1
+    command = "INSERT INTO users VALUES (" + str(num) + ",'" + user_username + "', '" + user_password1 + "');"
+    c.execute(command)
 
-createTable()
+    db.commit() #save changes
+    db.close()  #close database
+    return(num)
 
-register('admin', 'pass', 'pass')
+#createTable()
+#register('admin', 'admin', 'admin')
