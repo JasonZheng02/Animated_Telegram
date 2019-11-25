@@ -6,7 +6,7 @@
 import sqlite3
 import csv
 
-def createTable():
+def createUserTable():
     DB_FILE="database/databases.db"
     db = sqlite3.connect(DB_FILE)
     c = db.cursor()
@@ -16,6 +16,25 @@ def createTable():
     db.commit() #save changes
     db.close()  #close database
 
+def createHockeyTable():
+    DB_FILE="database/databases.db"
+    db = sqlite3.connect(DB_FILE)
+    c = db.cursor()
+    # Creates the user database: username|password|decks
+    command = "CREATE TABLE IF NOT EXISTS hockey (name TEXT PRIMARY KEY, health INT NOT NULL, attack INT NOT NULL, image TEXT);"
+    c.execute(command)
+    db.commit() #save changes
+    db.close()  #close database
+
+def createPokemonTable():
+    DB_FILE="database/databases.db"
+    db = sqlite3.connect(DB_FILE)
+    c = db.cursor()
+    # Creates the user database: username|password|decks
+    command = "CREATE TABLE IF NOT EXISTS pokemon (name TEXT PRIMARY KEY, element TEXT NOT NULL);"
+    c.execute(command)
+    db.commit() #save changes
+    db.close()  #close database
 
 def login(user_username, user_password):
     # RETURNS:
