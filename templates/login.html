@@ -9,22 +9,32 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <div style ="background:white; text-align:center" class="jumbotron jumbotron-fluid" >
+<div>
 <h1> Login Page </h1>
-<form action='/login', method="POST">
-  <div class="form-group">
-    <label>Username</label>
-    <input type="username"  placeholder="Enter Username" style="width:300px;" name="username">
+</div>
 
+<form>
+  <div class="container">
+    <div class="row justify-content-center align-items-center">
+  <div class="form-group row" style="width:500px">
+
+    <label class="col-sm-2 col-form-label">Username</label>
+    <div class="col-sm-10" >
+      <input type="username" class="form-control" placeholder="Username">
+    </div>
   </div>
-  <div class="form-group">
-    <label>Password</label>
-    <input type="password" placeholder="Password" style="width:300px;" name="password">
-    <small  class="form-text text-muted">Funny usernames get 10 bucks.</small>
+</div>
+</div>
+<div class="container">
+<div class="row justify-content-center align-items-center">
+  <div class="form-group row" style="width:500px; form-align:center; text-align:center">
+    <label  class="col-sm-2 col-form-label">Password</label>
+    <div class="col-sm-10">
+      <input type="password" class="form-control"placeholder="Password" >
+    </div>
   </div>
-  <div class="form-check">
-    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-    <label class="form-check-label" for="exampleCheck1">Check me out</label>
-  </div>
+</div>
+</div>
   <button type="submit" class="btn btn-primary">Submit</button>
   </form>
 <br>
