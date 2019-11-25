@@ -20,8 +20,6 @@ Description
 An online card game with similar ideas to Hearthstone.
 Cards will be NHL players or pokemons
 
-<<<<<<< HEAD
-
 Launch Instructions
 ----------------------------------
 pip install -r requirements.txt
@@ -50,7 +48,7 @@ How to Run
   ```
 **2)** Clone the repository and cd into it:
 ```console
-  $ git clone git@github.com:CalfinChoo/blog.git
+  $ git clone git@github.com:JasonZheng02/Animated_Telegram.git
   ...
   $ cd blog
 ```
@@ -59,4 +57,3 @@ How to Run
   $ python app.py
 ```
 **4)** View the webpage in your browser at URL: http://127.0.0.1:5000/
->>>>>>> ae7afc7d84b7a06a1c4e7d86aa46f4b25a925851
