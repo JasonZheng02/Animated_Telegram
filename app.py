@@ -78,7 +78,7 @@ def makeDeck():
         response = url.read()
         data = json.loads(response)
         data = data["people"][0]
-        name.append(data["firstName"] + " " + data["lastName"])
+        name.append(data["fullName"])
         x = x + 1
     return render_template("makeDeck.html", d = id, name = name)
 
