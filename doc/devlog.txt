@@ -1,8 +1,8 @@
-11/19/2019:
+rizzoJ -- 2019-11-19 19:12
 Jude: In response to the design doc feedback,I created a full and finished component map and added more details to the
 minimum viable product section.
 
-11/20/2019
+rizzoJ -- 2019-11-20 16:45
 Jude: I fleshed our the login mechanics for the siteusing the same techniques as I did with the blog, as well as updated the 
 component map.
 
@@ -10,17 +10,29 @@ Ego and programming Response:
 1. Personally, we don't have that much experience only being highschool students, but even the CS dojo and the QAF are technically
 informal groups that have been created due to the complextiy and variation of programming. These tend to form because 
 each individual in the social structure may have holes in their knowledge but as a group, they can collectively fix all of that.
-2.As far as I know, the terminal systems (Mac and Ubuntu) don't have built in communicaiton, instead from our experience
+2.As far as I know, the terminal systems (Mac and Ubuntu) don't have built in communication, instead from our experience
 external messneging communication is used.
 3.Solo projects are often reffered to as "my program" but group projects are more referred to as "our" or "a" program.
 4. I (Jude) have frequenlty blamed others in my head for programs that I myself know that I messed up, in addition to scheduling
-however, I pretty quivkly refer to self accoutability.
+however, I pretty quickly refer to self accoutability.
 5. I have sometimes blamed bad luck, because sometimes a typo can set you back a decent margin. I'm not more or less lucky than
-anyone else, but I do feel that once in a while luck can set you back
+anyone else, but I do feel that once in a while luck can set you back.
 
 Additional 2-3 sentence:
 Our group will stop referring to programs as "our program" and try to facilitate the common knowledge of every part of our
 program. In addition, we will try to up our use of the cs dojo and QAF to further use the informal social structures to aid
 in our programming
 
+tanM -- 2019-11-23 21:34
+- Finished login and register functions
+- Finished database for user info
+
+tanM -- 2019-11-25 14:38
+"HOME STRETCH PLAN":
+1. Finish character database and API linkage by 11/26 (Manfred)
+2. Finish CSS and HTML for main page and game page by 11/27 (Jude)
+3. Finish game function by 11/29 (Jason)
+- We will need to cut out some CSS if we do not have time to finish that.
+- If we finish ahead of schedule, we will add more functions to our game
+to make it more fun.
 
