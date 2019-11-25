@@ -7,6 +7,9 @@ from flask import Flask, render_template, request, session, url_for, redirect
 import sqlite3
 import os
 from database import setupDB
+import urllib.request as urlrequest
+from urllib.request import urlopen
+import json
 
 ################################################################################################################
 app = Flask(__name__)
@@ -59,7 +62,20 @@ def main():
 
 @app.route("/makeDeck")
 def makeDeck():
-    return render_template("makeDeck.html")
+    url = urlopen("https://records.nhl.com/site/api/player/byTeam/1")
+    response = url.read()
+    data = json.loads(response)
+    data = data["data"]
+    x = 0
+    id = []
+    while (x < 50):
+        id.append(data[x]["id"])
+        x = x + 1
+    url = urlopen("https://statsapi.web.nhl.com/api/v1/people/" + str(id[0]))
+    response = url.read()
+    data = json.loads(response)
+    data = data["people"][0]
+    return render_template("makeDeck.html", d = id, name = data["firstName"] + " " + data["lastName"])
 
 @app.route("/chooseDeck")
 def chooseDeck():
