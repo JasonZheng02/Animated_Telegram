@@ -18,7 +18,8 @@ Roles
 Description
 ----------------------------------
 An online card game with similar ideas to Hearthstone.
-Cards will be NHL players or pokemons
+Cards will be NHL players or pokemons. Users will be able to create
+their own decks of players.
 
 Launch Instructions
 ----------------------------------
@@ -50,10 +51,14 @@ How to Run
 ```console
   $ git clone git@github.com:JasonZheng02/Animated_Telegram.git
   ...
-  $ cd blog
+  $ cd Animated_Telegram
 ```
-**3)** Run the following command:
+**3)** Run the following commands:
 ```console
+  $ pip install -r requirements.txt
   $ python app.py
 ```
 **4)** View the webpage in your browser at URL: http://127.0.0.1:5000/
+
+
+
