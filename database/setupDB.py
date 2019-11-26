@@ -6,6 +6,7 @@
 import sqlite3
 import csv
 
+###################################################
 def createUserTable():
     DB_FILE="database/databases.db"
     db = sqlite3.connect(DB_FILE)
@@ -17,7 +18,7 @@ def createUserTable():
     db.close()  #close database
 
 def createHockeyTable():
-    DB_FILE="database/databases.db"
+    DB_FILE="databases.db"
     db = sqlite3.connect(DB_FILE)
     c = db.cursor()
     # Creates the user database: username|password|decks
@@ -27,7 +28,7 @@ def createHockeyTable():
     db.close()  #close database
 
 def createPokemonTable():
-    DB_FILE="database/databases.db"
+    DB_FILE="databases.db"
     db = sqlite3.connect(DB_FILE)
     c = db.cursor()
     # Creates the user database: username|password|decks
@@ -35,6 +36,8 @@ def createPokemonTable():
     c.execute(command)
     db.commit() #save changes
     db.close()  #close database
+
+###################################################
 
 def login(user_username, user_password):
     # RETURNS:
@@ -89,7 +92,14 @@ def register(user_username, user_password1, user_password2):
     db.close()  #close database
     return(num)
 
+###################################################
 
+def addHockey(name):
+    #INSERT INTO hockey VALUES ('name', 100, 25, 'img');
+    return False
+
+createHockeyTable()
+createPokemonTable()
 
 #createTable()
 #register('admin', 'admin', 'admin')
