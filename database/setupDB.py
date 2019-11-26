@@ -6,7 +6,10 @@
 import sqlite3
 import csv
 
-###################################################
+######################################################################################################
+######################################################################################################
+######################################################################################################
+
 def createUserTable():
     DB_FILE="database/databases.db"
     db = sqlite3.connect(DB_FILE)
@@ -32,12 +35,14 @@ def createPokemonTable():
     db = sqlite3.connect(DB_FILE)
     c = db.cursor()
     # Creates the user database: username|password|decks
-    command = "CREATE TABLE IF NOT EXISTS pokemon (name TEXT PRIMARY KEY, element TEXT NOT NULL);"
+    command = "CREATE TABLE IF NOT EXISTS pokemon (name TEXT PRIMARY KEY, element TEXT NOT NULL, image TEXT);"
     c.execute(command)
     db.commit() #save changes
     db.close()  #close database
 
-###################################################
+######################################################################################################
+######################################################################################################
+######################################################################################################
 
 def login(user_username, user_password):
     # RETURNS:
@@ -92,11 +97,42 @@ def register(user_username, user_password1, user_password2):
     db.close()  #close database
     return(num)
 
-###################################################
+######################################################################################################
+######################################################################################################
+######################################################################################################
 
-def addHockey(name):
+def addHockey(name,health,attack,image):
     #INSERT INTO hockey VALUES ('name', 100, 25, 'img');
-    return False
+    DB_FILE="database/databases.db"
+    db = sqlite3.connect(DB_FILE)
+    c = db.cursor()
+    #Adding hockey players
+    addHockey = "INSERT INTO hockey VALUES (\'" + name + "\', " + str(health) + ", " + str(attack) + ", \'" + image + "\'" + ");"
+    data = c.execute(addHockey)
+    db.commit() #save changes
+    db.close()  #close database
+    print( "Inserted: " + name + ", " + str(health) + ", " + str(attack) + ", " + image)
+    return(True)
+
+def addPokemon(name,element,image):
+    #INSERT INTO hockey VALUES ('name', 100, 25, 'img');
+    DB_FILE="database/databases.db"
+    db = sqlite3.connect(DB_FILE)
+    c = db.cursor()
+    #Adding hockey players
+    addPokemon = "INSERT INTO pokemon VALUES (\'" + name + "\', \'" + element + "\', \'" + image + "\'" + ");"
+    data = c.execute(addPokemon)
+    db.commit() #save changes
+    db.close()  #close database
+    print( "Inserted: " + name + ", " + element + ", " + image)
+    return(True)
+
+######################################################################################################
+######################################################################################################
+######################################################################################################
+
+#addHockey("Lebron James", 500, 150, "jamesL.png")
+#addHockey("Manfred Tan", 300, 15, "tanM.png")
 
 
 #createTable()
