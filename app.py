@@ -72,14 +72,11 @@ def makeDeck():
     name = []
     while (x < 50):
         id.append(data[x]["id"])
-        x = x + 1
-    x = 0
-    while (x < 50):
         url = urlopen("https://statsapi.web.nhl.com/api/v1/people/" + str(id[x]))
         response = url.read()
-        data = json.loads(response)
-        data = data["people"][0]
-        name.append(data["fullName"])
+        data2 = json.loads(response)
+        data2 = data2["people"][0]
+        name.append(data2["fullName"])
         x = x + 1
     return render_template("makeDeck.html", d = id, name = name)
 
