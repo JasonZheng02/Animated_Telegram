@@ -18,7 +18,7 @@ def createUserTable():
     db.close()  #close database
 
 def createHockeyTable():
-    DB_FILE="databases.db"
+    DB_FILE="database/databases.db"
     db = sqlite3.connect(DB_FILE)
     c = db.cursor()
     # Creates the user database: username|password|decks
@@ -28,7 +28,7 @@ def createHockeyTable():
     db.close()  #close database
 
 def createPokemonTable():
-    DB_FILE="databases.db"
+    DB_FILE="database/databases.db"
     db = sqlite3.connect(DB_FILE)
     c = db.cursor()
     # Creates the user database: username|password|decks
@@ -98,8 +98,6 @@ def addHockey(name):
     #INSERT INTO hockey VALUES ('name', 100, 25, 'img');
     return False
 
-createHockeyTable()
-createPokemonTable()
 
 #createTable()
 #register('admin', 'admin', 'admin')

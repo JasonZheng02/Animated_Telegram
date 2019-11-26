@@ -22,6 +22,7 @@ def dock():
 @app.route("/login", methods=["POST"])
 def login():
     if (request.form):
+        print(True)
         session['username'] = request.form["username"]  # assign username key in session to inputted username
         session['password'] = request.form["password"]  # assign password key in session to inputted password
         getID = setupDB.login(session['username'], session['password'])
