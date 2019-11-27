@@ -1,0 +1,17 @@
+ALL METHODS WITHIN setupDB.py FILE:
+
+createUserTable()
+createHockeyTable()
+createPokemonTable()
+
+
+login(username_string, password_string)
+register(username_string, password1_string, password2_string)
+
+
+
+Add hockey player into database:
+addHockey(name_string, health_int, attack_int, image_string)
+
+Add pokemon into database:
+addPokemon(name_string, element_string, image_string)
