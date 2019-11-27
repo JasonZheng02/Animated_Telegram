@@ -8,7 +8,7 @@ import sqlite3
 import os
 from database import setupDB
 import urllib.request as urlrequest
-from urllib.request import urlopen
+from urllib.request import urlopen, Request
 import json
 
 ################################################################################################################
@@ -70,6 +70,7 @@ def makeDeck():
     x = 0
     id = []
     name = []
+    pokemon = []
     while (x < 50):
         id.append(data[x]["id"])
         url = urlopen("https://statsapi.web.nhl.com/api/v1/people/" + str(id[x]))
@@ -78,7 +79,11 @@ def makeDeck():
         data2 = data2["people"][0]
         name.append(data2["fullName"])
         x = x + 1
-    return render_template("makeDeck.html", d = id, name = name)
+    req = Request("https://pokeapi.co/api/v2/pokemon/pikachu", headers = {'User-Agent': 'Mozilla/5.0'})
+    link = urlopen(req)
+    response = link.read()
+    data = json.loads(response)
+    return render_template("makeDeck.html", d = id, name = name, pokemon = data)
 
 @app.route("/chooseDeck")
 def chooseDeck():
