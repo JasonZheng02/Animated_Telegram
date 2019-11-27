@@ -25,6 +25,8 @@ Add pokemon into database:
 addPokemon(name_string, element_string, image_string)
     Returns: True
 
+chooseHockey(name_string) returns that character's info in a list
+choosePokemon(name_string) ^
 
 showAll() returns ALL CHARACTERS
 format: listOfCharacters[x][y][z]

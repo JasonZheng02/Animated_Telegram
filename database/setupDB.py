@@ -131,11 +131,27 @@ def addPokemon(name,element,image):
 ######################################################################################################
 ######################################################################################################
 
-def chooseHockey():
-    return(True)
+def chooseHockey(name):
+    DB_FILE="database/databases.db"
+    db = sqlite3.connect(DB_FILE)
+    c = db.cursor()
+    findHockey = "SELECT * FROM hockey WHERE name=\'" + name + "\';"
+    data = c.execute(findHockey)
+    player = []
+    for row in data:
+        print("Character in list form: " + str(row))
+        return(row)
 
-def choosePokemon():
-    return(True)
+def choosePokemon(name):
+    DB_FILE="database/databases.db"
+    db = sqlite3.connect(DB_FILE)
+    c = db.cursor()
+    findPokemon = "SELECT * FROM pokemon WHERE name=\'" + name + "\';"
+    data = c.execute(findPokemon)
+    player = []
+    for row in data:
+        print("Character in list form: " + str(row))
+        return(row)
 
 ######################################################################################################
 ######################################################################################################
