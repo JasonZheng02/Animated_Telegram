@@ -131,6 +131,44 @@ def addPokemon(name,element,image):
 ######################################################################################################
 ######################################################################################################
 
+def chooseHockey():
+    return(True)
+
+def choosePokemon():
+    return(True)
+
+######################################################################################################
+######################################################################################################
+######################################################################################################
+
+def showAll():
+    DB_FILE="database/databases.db"
+    db = sqlite3.connect(DB_FILE)
+    c = db.cursor()
+    ###
+    listOfCharacters = []
+    listOfHockey = []
+    listOfPokemon = []
+    ###
+    displayHockey = "SELECT * FROM hockey;"
+    data = c.execute(displayHockey)
+    for row in data:
+        listOfHockey.append(row)
+    ###
+    displayPokemon = "SELECT * FROM pokemon;"
+    data = c.execute(displayPokemon)
+    for row in data:
+        listOfPokemon.append(row)
+    ###
+    listOfCharacters.append(listOfHockey)
+    listOfCharacters.append(listOfPokemon)
+    print("Returns: " + str(listOfCharacters))
+    print("listOfCharacters[0][0]: " + str(listOfCharacters[0][0]))
+    print("listOfCharacters[0][0][0]: " + listOfCharacters[0][0][0])
+
+    return(listOfCharacters)
+
+
 #addHockey("Lebron James", 500, 150, "jamesL.png")
 #addHockey("Manfred Tan", 300, 15, "tanM.png")
 

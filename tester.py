@@ -14,7 +14,7 @@ import json
 
 
 def testAddPokemon():
-    return(setupDB.addPokemon('manfred', 'fire', 'manfred.jpeg'))
+    return(setupDB.showAll())
 
 
 testAddPokemon()

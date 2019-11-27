@@ -6,12 +6,28 @@ createPokemonTable()
 
 
 login(username_string, password_string)
+    Returns -1 if invalid, otherwise returns user ID
+
 register(username_string, password1_string, password2_string)
+    RETURNS:
+    -1 for existing username
+    -2 for passwords do not match
+    -3 for password not over 5 characters
+    if valid returns userID
 
 
 
 Add hockey player into database:
 addHockey(name_string, health_int, attack_int, image_string)
+    Returns: True
 
 Add pokemon into database:
 addPokemon(name_string, element_string, image_string)
+    Returns: True
+
+
+showAll() returns ALL CHARACTERS
+format: listOfCharacters[x][y][z]
+  x = either list of hockey (0) or pokemon (1)
+  y = single character, in list form
+  z = name, element, etc. For hockey (0-3), for pokemon (0-2)
