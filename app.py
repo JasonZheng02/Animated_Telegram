@@ -11,7 +11,6 @@ import urllib.request as urlrequest
 from urllib.request import urlopen, Request
 import json
 
-
 ##################################################################################
 DB_FILE = "database/databases.db"
 db = sqlite3.connect(DB_FILE)
@@ -26,6 +25,39 @@ if c.fetchone()[0] < 1:
         s += "char" + str(i) + " TEXT" + ","
     c.execute(s[:len(s) - 1] + ");")
 
+url = urlopen("https://records.nhl.com/site/api/player/byTeam/1")
+response = url.read()
+data = json.loads(response)
+data = data["data"]
+x = 0
+id = []
+name = []
+height = []
+weight = []
+nhl = []
+pokemon = ["pikachu", "bulbasaur", "charmander", "squirtle"]
+pokemonType = []
+while (x < 50):
+    id.append(data[x]["id"])
+    url = urlopen("https://statsapi.web.nhl.com/api/v1/people/" + str(id[x]))
+    response = url.read()
+    data2 = json.loads(response)
+    data2 = data2["people"][0]
+    name.append(data2["fullName"])
+    height.append(data2["height"])
+    weight.append(data2["weight"])
+    x = x + 1
+for x in pokemon:
+    req = Request("https://pokeapi.co/api/v2/pokemon/" + str(x), headers = {'User-Agent': 'Mozilla/5.0'})
+    link = urlopen(req)
+    response = link.read()
+    data = json.loads(response)
+    pokemonType.append(data["types"][0]["type"]["name"])
+x = 0
+while (x < 50):
+    nhl.append(" " + str(name[x]) + ", " + str(height[x]) + ", " + str(weight[x]) + " ")
+    x = x + 1
+    
 ################################################################################################################
 app = Flask(__name__)
 app.secret_key = os.urandom(32) #generates secret key for session
@@ -79,38 +111,6 @@ def main():
 
 @app.route("/makeDeck")
 def makeDeck():
-    url = urlopen("https://records.nhl.com/site/api/player/byTeam/1")
-    response = url.read()
-    data = json.loads(response)
-    data = data["data"]
-    x = 0
-    id = []
-    name = []
-    height = []
-    weight = []
-    nhl = []
-    pokemon = ["pikachu", "bulbasaur", "charmander", "squirtle"]
-    pokemonType = []
-    while (x < 50):
-        id.append(data[x]["id"])
-        url = urlopen("https://statsapi.web.nhl.com/api/v1/people/" + str(id[x]))
-        response = url.read()
-        data2 = json.loads(response)
-        data2 = data2["people"][0]
-        name.append(data2["fullName"])
-        height.append(data2["height"])
-        weight.append(data2["weight"])
-        x = x + 1
-    for x in pokemon:
-        req = Request("https://pokeapi.co/api/v2/pokemon/" + str(x), headers = {'User-Agent': 'Mozilla/5.0'})
-        link = urlopen(req)
-        response = link.read()
-        data = json.loads(response)
-        pokemonType.append(data["types"][0]["type"]["name"])
-    x = 0
-    while (x < 50):
-        nhl.append(" " + str(name[x]) + ", " + str(height[x]) + ", " + str(weight[x]) + " ")
-        x = x + 1
     return render_template("makeDeck.html", nhl = nhl, pokemon = pokemon, pokemonType = pokemonType)
 
 @app.route("/chooseDeck")
