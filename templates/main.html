@@ -1,13 +1,50 @@
 {% extends "base.html" %}
 {% block title %} Main Page {% endblock %}
 {% block body %}
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<div style ="background:white; text-align:center" class="jumbotron jumbotron-fluid" >
 <h1> Main Page </h1>
     Welcome {{user}}! <br>
-    <form action = "/chooseDeck">
-      <input type="submit" value="Play">
-    </form>
 
-    <form action = "/makeDeck">
-      <input type="submit" value="Make New Deck">
-    </form>
+<body>
+
+
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Play A Round!</h5>
+            <p class="card-text">Draw and pit your cards against our AI!</p>
+            <form action = "/chooseDeck">
+              <input type="submit" class="btn btn-primary" value="Play">
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Make your deck!</h5>
+            <p class="card-text">Build your ultimate deck!</p>
+            <form action = "/makeDeck">
+              <input type="submit" class="btn btn-primary" value="Make New Deck">
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+</body>
+
+
+
+
+
+
 {% endblock %}
