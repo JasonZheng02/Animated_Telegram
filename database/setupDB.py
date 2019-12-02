@@ -20,7 +20,7 @@ def createUserTable():
     db.commit() #save changes
     db.close()  #close database
 
-def createHockeyTable():
+def createCharsTable():
     DB_FILE="database/databases.db"
     db = sqlite3.connect(DB_FILE)
     c = db.cursor()
@@ -30,7 +30,7 @@ def createHockeyTable():
     db.commit() #save changes
     db.close()  #close database
 
-def createPokemonTable():
+def createDecksTable():
     DB_FILE="database/databases.db"
     db = sqlite3.connect(DB_FILE)
     c = db.cursor()

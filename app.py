@@ -12,6 +12,7 @@ from urllib.request import urlopen, Request
 import json
 
 ##################################################################################
+setupDB.createUserTable()
 url = urlopen("https://records.nhl.com/site/api/player/byTeam/1")
 response = url.read()
 data = json.loads(response)
@@ -124,18 +125,9 @@ def makeDeck():
         c = db.cursor()
         c.execute('SELECT * FROM chars')
         players = c.fetchall()
-        table = ""
-        for i in range(54):
-            table += "<tr> \n"
-            table += '<th scope="row">' + str(i+1) + '</th> \n'
-            table += '<td>' + players[i][0] + '</td>'
-            table += '<td>' + str(players[i][1]) + '</td>'
-            table += '<td>' + str(players[i][2]) + '</td>'
-            table += '<td>' + str(players[i][3]) + '</td>'
-            table += "</tr> \n"
+    
     #we also need to make a deck maker string, that we will evenetually loop through and add to the decks database
-
-    return render_template("makeDeck.html", nhl = nhl, pokemon = pokemon, pokemonType = pokemonType, tabless = table)
+    return render_template("makeDeck.html", nhl = nhl, pokemon = pokemon, pokemonType = pokemonType, players = players)
 
 @app.route("/chooseDeck")
 def chooseDeck():
