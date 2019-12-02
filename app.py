@@ -20,7 +20,7 @@ if c.fetchone()[0] < 1:
     c.execute("CREATE TABLE chars(name TEXT, attack INT, defense INT, type TEXT);")
 c.execute(''' SELECT count(name) FROM sqlite_master WHERE type='table' AND name='decks' ''')
 if c.fetchone()[0] < 1:
-    s = "CREATE TABLE decks(user TEXT, deckname INT,"
+    s = "CREATE TABLE decks(user TEXT, deckname TEXT,"
     for i in range(30):
         s += "char" + str(i) + " TEXT" + ","
     c.execute(s[:len(s) - 1] + ");")
@@ -54,10 +54,15 @@ for x in pokemon:
     data = json.loads(response)
     pokemonType.append(data["types"][0]["type"]["name"])
 x = 0
-while (x < 50):
-    nhl.append(" " + str(name[x]) + ", " + str(height[x]) + ", " + str(weight[x]) + " ")
-    x = x + 1
-    
+with sqlite3.connect(DB_FILE) as db:
+    c = db.cursor()
+    while (x < 50):
+        c.execute('INSERT INTO chars VALUES (?, ?, ? ,?)', (name[x], height[x], weight[x], 'hockey'))
+        nhl.append(" " + str(name[x]) + ", " + str(height[x]) + ", " + str(weight[x]) + " ")
+        x = x + 1
+    c.execute('SELECT * FROM chars WHERE type = (?)', ('hockey',))
+    print(c.fetchall())
+
 ################################################################################################################
 app = Flask(__name__)
 app.secret_key = os.urandom(32) #generates secret key for session
