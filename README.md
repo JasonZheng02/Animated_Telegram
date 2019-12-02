@@ -55,10 +55,7 @@ How to Run
 ```
 **3)** Run the following commands:
 ```console
-  $ pip install -r requirements.txt
+  $ pip install -r doc/requirements.txt
   $ python app.py
 ```
 **4)** View the webpage in your browser at URL: http://127.0.0.1:5000/
-
-
-
