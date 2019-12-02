@@ -2,10 +2,9 @@
 {% block title %} Make Deck {% endblock %}
 {% block body %}
 <h1> Make Deck </h1>
-    <form action = "/main">
-      <input type="submit" value="Done">
-    </form>
-    <table class="table">
+
+<table class="table">
+
   <thead>
     <tr>
     <th scope="col">Name</th>
@@ -29,18 +28,22 @@
     {% else %}
     <td>N/A</td>
     {% endif %}
-    {% if i[3] != 0 %}
+    {% if i[3] != "hockey" %}
     <td>{{ i[3] }}</td>
     {% else %}
     <td>N/A</td>
     {% endif %}
     
+
+
+
   </tr>
   {% endfor %}
 </tbody>
 </table>
-	<p>{{nhl}}</p>
-	<p>{{pokemon}}</p>
-	<p>{{pokemonType}}</p>
+<form action = "/main">
+  <input type="submit" value="Done">
+</form>
+<table class="table">
 
 {% endblock %}

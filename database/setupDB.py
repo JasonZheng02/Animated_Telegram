@@ -5,6 +5,12 @@
 
 import sqlite3
 import csv
+from flask import Flask, render_template, request, session, url_for, redirect
+import sqlite3
+import os
+import urllib.request as urlrequest
+from urllib.request import urlopen, Request
+import json
 
 ######################################################################################################
 ######################################################################################################
@@ -19,6 +25,61 @@ def createUserTable():
     c.execute(command)
     db.commit() #save changes
     db.close()  #close database
+
+
+def yurd():
+    DB_FILE="database/databases.db"
+    url = urlopen("https://records.nhl.com/site/api/player/byTeam/1")
+    response = url.read()
+    data = json.loads(response)
+    data = data["data"]
+    x = 0
+    id = []
+    name = []
+    height = []
+    weight = []
+    nhl = []
+    pokemon = ["pikachu", "bulbasaur", "charmander", "squirtle", "turtwig"]
+    pokemonType = []
+    DB_FILE = "database/databases.db"
+    db = sqlite3.connect(DB_FILE)
+    c = db.cursor()
+    c.execute(''' SELECT count(name) FROM sqlite_master WHERE type='table' AND name='chars' ''')
+    if c.fetchone()[0] < 1:
+        c.execute("CREATE TABLE chars(name TEXT, attack INT, defense INT, type TEXT);")
+        while (x < 50):
+            id.append(data[x]["id"])
+            url = urlopen("https://statsapi.web.nhl.com/api/v1/people/" + str(id[x]))
+            response = url.read()
+            data2 = json.loads(response)
+            data2 = data2["people"][0]
+            name.append(data2["fullName"])
+            height.append(data2["height"])
+            weight.append(data2["weight"])
+            x = x + 1
+        for x in pokemon:
+            req = Request("https://pokeapi.co/api/v2/pokemon/" + str(x), headers = {'User-Agent': 'Mozilla/5.0'})
+            link = urlopen(req)
+            response = link.read()
+            data = json.loads(response)
+            pokemonType.append(data["types"][0]["type"]["name"])
+        x = 0
+        with sqlite3.connect(DB_FILE) as db:
+            c = db.cursor()
+            while (x < 50):
+                c.execute('INSERT INTO chars VALUES (?, ?, ? ,?)', (name[x], height[x], weight[x], 'hockey'))
+                nhl.append(" " + str(name[x]) + ", " + str(height[x]) + ", " + str(weight[x]) + " ")
+                x = x + 1
+
+            for i in range(5):
+                c.execute('INSERT INTO chars VALUES (?, ?, ?, ?)', (pokemon[i], 0,0, pokemonType[i]))
+            c.execute('SELECT * FROM chars')
+    c.execute(''' SELECT count(name) FROM sqlite_master WHERE type='table' AND name='decks' ''')
+    if c.fetchone()[0] < 1:
+        s = "CREATE TABLE decks(user TEXT, deckname TEXT,"
+        for i in range(30):
+            s += "char" + str(i) + " TEXT" + ","
+        c.execute(s[:len(s) - 1] + ");")
 
 def createCharsTable():
     DB_FILE="database/databases.db"
