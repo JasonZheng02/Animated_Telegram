@@ -12,19 +12,6 @@ from urllib.request import urlopen, Request
 import json
 
 ##################################################################################
-DB_FILE = "database/databases.db"
-db = sqlite3.connect(DB_FILE)
-c = db.cursor()
-c.execute(''' SELECT count(name) FROM sqlite_master WHERE type='table' AND name='chars' ''')
-if c.fetchone()[0] < 1:
-    c.execute("CREATE TABLE chars(name TEXT, attack INT, defense INT, type TEXT);")
-c.execute(''' SELECT count(name) FROM sqlite_master WHERE type='table' AND name='decks' ''')
-if c.fetchone()[0] < 1:
-    s = "CREATE TABLE decks(user TEXT, deckname TEXT,"
-    for i in range(30):
-        s += "char" + str(i) + " TEXT" + ","
-    c.execute(s[:len(s) - 1] + ");")
-
 url = urlopen("https://records.nhl.com/site/api/player/byTeam/1")
 response = url.read()
 data = json.loads(response)
@@ -37,34 +24,48 @@ weight = []
 nhl = []
 pokemon = ["pikachu", "bulbasaur", "charmander", "squirtle", "turtwig"]
 pokemonType = []
-while (x < 50):
-    id.append(data[x]["id"])
-    url = urlopen("https://statsapi.web.nhl.com/api/v1/people/" + str(id[x]))
-    response = url.read()
-    data2 = json.loads(response)
-    data2 = data2["people"][0]
-    name.append(data2["fullName"])
-    height.append(data2["height"])
-    weight.append(data2["weight"])
-    x = x + 1
-for x in pokemon:
-    req = Request("https://pokeapi.co/api/v2/pokemon/" + str(x), headers = {'User-Agent': 'Mozilla/5.0'})
-    link = urlopen(req)
-    response = link.read()
-    data = json.loads(response)
-    pokemonType.append(data["types"][0]["type"]["name"])
-x = 0
-with sqlite3.connect(DB_FILE) as db:
-    c = db.cursor()
+DB_FILE = "database/databases.db"
+db = sqlite3.connect(DB_FILE)
+c = db.cursor()
+c.execute(''' SELECT count(name) FROM sqlite_master WHERE type='table' AND name='chars' ''')
+if c.fetchone()[0] < 1:
+    c.execute("CREATE TABLE chars(name TEXT, attack INT, defense INT, type TEXT);")
     while (x < 50):
-        c.execute('INSERT INTO chars VALUES (?, ?, ? ,?)', (name[x], height[x], weight[x], 'hockey'))
-        nhl.append(" " + str(name[x]) + ", " + str(height[x]) + ", " + str(weight[x]) + " ")
+        id.append(data[x]["id"])
+        url = urlopen("https://statsapi.web.nhl.com/api/v1/people/" + str(id[x]))
+        response = url.read()
+        data2 = json.loads(response)
+        data2 = data2["people"][0]
+        name.append(data2["fullName"])
+        height.append(data2["height"])
+        weight.append(data2["weight"])
         x = x + 1
+    for x in pokemon:
+        req = Request("https://pokeapi.co/api/v2/pokemon/" + str(x), headers = {'User-Agent': 'Mozilla/5.0'})
+        link = urlopen(req)
+        response = link.read()
+        data = json.loads(response)
+        pokemonType.append(data["types"][0]["type"]["name"])
+    x = 0
+    with sqlite3.connect(DB_FILE) as db:
+        c = db.cursor()
+        while (x < 50):
+            c.execute('INSERT INTO chars VALUES (?, ?, ? ,?)', (name[x], height[x], weight[x], 'hockey'))
+            nhl.append(" " + str(name[x]) + ", " + str(height[x]) + ", " + str(weight[x]) + " ")
+            x = x + 1
 
-    for i in range(5):
-        c.execute('INSERT INTO chars VALUES (?, ?, ?, ?)', (pokemon[i], 0,0, pokemonType[i]))
-    c.execute('SELECT * FROM chars')
-    print(c.fetchall())
+        for i in range(5):
+            c.execute('INSERT INTO chars VALUES (?, ?, ?, ?)', (pokemon[i], 0,0, pokemonType[i]))
+        c.execute('SELECT * FROM chars')
+c.execute(''' SELECT count(name) FROM sqlite_master WHERE type='table' AND name='decks' ''')
+if c.fetchone()[0] < 1:
+    s = "CREATE TABLE decks(user TEXT, deckname TEXT,"
+    for i in range(30):
+        s += "char" + str(i) + " TEXT" + ","
+    c.execute(s[:len(s) - 1] + ");")
+
+
+    print(len(c.fetchall()))
 
 ################################################################################################################
 app = Flask(__name__)
@@ -121,9 +122,20 @@ def main():
 def makeDeck():
     with sqlite3.connect(DB_FILE) as db:
         c = db.cursor()
-        c.execute('SELECT * FROM ')
-    string table = '<tr> <th scope="row">2</th> <td>Jacob</td> <td>Thornton</td> <td>@fat</td> </tr>'
-    return render_template("makeDeck.html", nhl = nhl, pokemon = pokemon, pokemonType = pokemonType)
+        c.execute('SELECT * FROM chars')
+        players = c.fetchall()
+        table = ""
+        for i in range(54):
+            table += "<tr> \n"
+            table += '<th scope="row">' + str(i+1) + '</th> \n'
+            table += '<td>' + players[i][0] + '</td>'
+            table += '<td>' + str(players[i][1]) + '</td>'
+            table += '<td>' + str(players[i][2]) + '</td>'
+            table += '<td>' + str(players[i][3]) + '</td>'
+            table += "</tr> \n"
+    #we also need to make a deck maker string, that we will evenetually loop through and add to the decks database
+
+    return render_template("makeDeck.html", nhl = nhl, pokemon = pokemon, pokemonType = pokemonType, tabless = table)
 
 @app.route("/chooseDeck")
 def chooseDeck():
