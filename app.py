@@ -119,6 +119,10 @@ def main():
 
 @app.route("/makeDeck")
 def makeDeck():
+    with sqlite3.connect(DB_FILE) as db:
+        c = db.cursor()
+        c.execute('SELECT * FROM ')
+    string table = '<tr> <th scope="row">2</th> <td>Jacob</td> <td>Thornton</td> <td>@fat</td> </tr>'
     return render_template("makeDeck.html", nhl = nhl, pokemon = pokemon, pokemonType = pokemonType)
 
 @app.route("/chooseDeck")
