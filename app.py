@@ -35,7 +35,7 @@ name = []
 height = []
 weight = []
 nhl = []
-pokemon = ["pikachu", "bulbasaur", "charmander", "squirtle"]
+pokemon = ["pikachu", "bulbasaur", "charmander", "squirtle", "turtwig"]
 pokemonType = []
 while (x < 50):
     id.append(data[x]["id"])
@@ -60,7 +60,10 @@ with sqlite3.connect(DB_FILE) as db:
         c.execute('INSERT INTO chars VALUES (?, ?, ? ,?)', (name[x], height[x], weight[x], 'hockey'))
         nhl.append(" " + str(name[x]) + ", " + str(height[x]) + ", " + str(weight[x]) + " ")
         x = x + 1
-    c.execute('SELECT * FROM chars WHERE type = (?)', ('hockey',))
+
+    for i in range(5):
+        c.execute('INSERT INTO chars VALUES (?, ?, ?, ?)', (pokemon[i], 0,0, pokemonType[i]))
+    c.execute('SELECT * FROM chars')
     print(c.fetchall())
 
 ################################################################################################################
