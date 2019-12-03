@@ -14,7 +14,9 @@
   {% for name in players %}
   <tr>
     <th>{{name[1]}} </th>
-    <th><a href="/chooser/{{name}}" role="btn" class="btn btn-success">Choose this Deck</a></th>
+    <th><form action = '/playScreen'>
+      <button type="submit" class="btn btn-primary">Choose this Deck</button>
+    </form></th>
   <tr>
   {% endfor %}
   </tbody>
