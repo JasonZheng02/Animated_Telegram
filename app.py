@@ -6,6 +6,7 @@
 from flask import Flask, render_template, request, session, url_for, redirect
 import sqlite3
 import os
+import random
 from database import setupDB
 import urllib.request as urlrequest
 from urllib.request import urlopen, Request
@@ -168,7 +169,7 @@ def defeat():
 def playScreen():
     return render_template("playScreen.html")
 
-@app.route("/gamePage")
+@app.route("/gamePage", methods=["GET", "POST"])
 def playGame():
 
     yourLives = 3
@@ -180,7 +181,7 @@ def playGame():
     c.execute(command)
     computerDeck = c.fetchall()
 
-    if (request.form): #If anything submitted, then go to battle page
+    if (request.form["deckName"]): #If anything submitted, then go to battle page
         yourCard = computerDeck[random.randint(0,50)] #chooseCard(userDeck)
         #removeCard(userDeck, yourCard)
         compCard = computerDeck[random.randint(0,50)]
@@ -213,9 +214,7 @@ def playGame():
             #yourDeck = userDeck
             yourLives = yourLives,
             compLives = compLives,
-            yourCard = None,
-            compCard = None,
-            message = None)
+            message = "NOTHING HERE")
 
 
 if __name__ == "__main__":
