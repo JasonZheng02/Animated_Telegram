@@ -30,10 +30,15 @@
 
     <div>
         YOUR DECK
-        {{yourLives}}
+        Lives left = {{yourLives}}
+
 
         <form action="/gamePage", method="POST">
-            <input type="username" name="deckName">
+            {% for character in yourDeck: %}
+                <input type="radio" name=character>
+            {% endfor %}
+            <input type="radio" name=character>
+
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
 

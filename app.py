@@ -180,10 +180,11 @@ def playScreen():
     return render_template("playScreen.html")
 
 @app.route("/gamePage", methods=["GET", "POST"])
-def playGame():
+def gamePage():
 
     yourLives = 3
     compLives = 3
+    yourDeck = ['person1','person2','person3']
 
     db = sqlite3.connect(DB_FILE)
     c = db.cursor()
@@ -191,7 +192,13 @@ def playGame():
     c.execute(command)
     computerDeck = c.fetchall()
 
-    if (request.form["deckName"]): #If anything submitted, then go to battle page
+    print('****************************')
+    print(request.form.get("choice1"))
+    print(request.form)
+
+
+
+    if (request.form): #If anything submitted, then go to battle page
         yourCard = computerDeck[random.randint(0,50)] #chooseCard(userDeck)
         #removeCard(userDeck, yourCard)
         compCard = computerDeck[random.randint(0,50)]
@@ -205,7 +212,7 @@ def playGame():
         ######
         if (battle == True):
             return render_template('gamePage.html',
-                #yourDeck = userDeck
+                yourDeck = yourDeck,
                 yourLives = yourLives,
                 compLives = compLives,
                 yourCard = yourCard,
@@ -213,7 +220,7 @@ def playGame():
                 message = "YOU WON!")
         else:
             return render_template('gamePage.html',
-                #yourDeck = userDeck
+                yourDeck = yourDeck,
                 yourLives = yourLives,
                 compLives = compLives,
                 yourCard = yourCard,
@@ -221,7 +228,7 @@ def playGame():
                 message = "YOU LOST!")
     else:
         return render_template('gamePage.html',
-            #yourDeck = userDeck
+            yourDeck = yourDeck,
             yourLives = yourLives,
             compLives = compLives,
             message = "NOTHING HERE")
