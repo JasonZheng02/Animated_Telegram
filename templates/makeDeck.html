@@ -11,6 +11,7 @@
     <th scope="col">Attack(Hockey)</th>
     <th scope="col">Defense(Hockey)</th>
     <th scope="col">Type(Pokemon)</th>
+    <th scope="col">Image</th>
     </tr>
   </thead>
   <tbody>
@@ -32,6 +33,16 @@
     <td>{{ i[3] }}</td>
     {% else %}
     <td>N/A</td>
+    {% endif %}
+    {% if i[4] != 0 %}
+    <div class="card" style="width: 18rem;">
+      <img src={{url_for('static', filename = 'Images/NHL/' + i[0] + '.jpg')}} class="card-img-top" alt="Need to add image">
+      <div class="card-body">
+        <h5 class="card-title">{{i[0]}}</h5>
+        <p class="card-text">Attack: {{i[1]}}</p>
+        <p class="card-text">Defense: {{i[2]}}</p>
+      </div>
+    </div>
     {% endif %}
     {%if i[0] in deck%}
     <td><a href="/removefromdeck/{{deck}}/{{i[0]}}" role="btn" class="btn btn-danger">Remove from deck</a></td>
