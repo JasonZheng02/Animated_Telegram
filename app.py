@@ -89,7 +89,7 @@ def nameDeck():
                  # assign password key in session to inputted
 
         print("2222222222222222")
-        return render_template("makeDeck.html", user=session['username'])
+        return redirect('/makeDeck')
     return render_template("nameDeck.html", user=session['username'], errorMessage = errorMessage)
 
 @app.route("/main")
