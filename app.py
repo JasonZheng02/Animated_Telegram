@@ -118,7 +118,7 @@ def makeDeck():
         players = c.fetchall()
 
     #we also need to make a deck maker string, that we will evenetually loop through and add to the decks database
-    return render_template("makeDeck.html",  players = players, deck = currentDeck)
+    return render_template("makeDeck.html",  players = players, deck = currentDeck, l = len(currentDeck))
 
 @app.route("/chooseDeck")
 def chooseDeck():

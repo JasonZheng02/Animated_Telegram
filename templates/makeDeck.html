@@ -45,9 +45,15 @@
   {% endfor %}
 </tbody>
 </table>
+{%if l == 15 %}
 <form action = "/main">
   <input type="submit" value="Done">
 </form>
+{% else %}
+<form action = "/main">
+  <input type="submit" value="Done" disabled>
+</form>
+{% endif %}
 <table class="table">
 
 {% endblock %}
