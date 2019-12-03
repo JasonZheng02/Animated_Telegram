@@ -83,7 +83,7 @@ def nameDeck():
             c.execute("SELECT deckname FROM decks WHERE user = '" + session["username"] + "' AND deckname = '" +  request.form["deckName"] + "';")
             if (not len(c.fetchall()) == 0) or request.form["deckName"] == "":
                 errorMessage = "Name Taken or empty form"
-                print("11111111111111111111111")
+                print(request.form["deckName"] + "11111111111111111111111")
                 return render_template("nameDeck.html", user=session['username'], errorMessage = errorMessage)
         nameDecks = request.form["deckName"]
         #print(nameDecks + "77777777777777777777777777777777777777777777777777777777777777777777777777777777777777777")
@@ -121,8 +121,9 @@ def edit_deck(deck_name):
 
 @app.route('/newDeck')
 def newDeck():
+    global nameDecks
     global currentDeck
-    print(currentDeck)
+    print(nameDeck)
     temp = [session["username"], nameDecks]
     #ok we have to add this to the database now
     for i in currentDeck:
@@ -153,6 +154,8 @@ def makeDeck():
     #we also need to make a deck maker string, that we will evenetually loop through and add to the decks database
     return render_template("makeDeck.html",  players = players, deck = currentDeck, l = len(currentDeck))
 
+
+
 @app.route("/chooseDeck")
 def chooseDeck():
     with sqlite3.connect(DB_FILE) as db:
@@ -161,7 +164,7 @@ def chooseDeck():
         stuff = c.fetchall()
         names = []
         for i in stuff:
-            names.append(stuff[1])
+            names.append(i)
         return render_template("chooseDeck.html", players = names)
 
 @app.route("/victory")
