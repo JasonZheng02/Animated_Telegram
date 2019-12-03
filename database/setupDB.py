@@ -77,29 +77,11 @@ def yurd():
     c.execute(''' SELECT count(name) FROM sqlite_master WHERE type='table' AND name='decks' ''')
     if c.fetchone()[0] < 1:
         s = "CREATE TABLE decks(user TEXT, deckname TEXT,"
-        for i in range(30):
+        for i in range(15):
             s += "char" + str(i) + " TEXT" + ","
         c.execute(s[:len(s) - 1] + ");")
 
-def createCharsTable():
-    DB_FILE="database/databases.db"
-    db = sqlite3.connect(DB_FILE)
-    c = db.cursor()
-    # Creates the user database: username|password|decks
-    command = "CREATE TABLE IF NOT EXISTS hockey (name TEXT PRIMARY KEY, health INT NOT NULL, attack INT NOT NULL, image TEXT);"
-    c.execute(command)
-    db.commit() #save changes
-    db.close()  #close database
 
-def createDecksTable():
-    DB_FILE="database/databases.db"
-    db = sqlite3.connect(DB_FILE)
-    c = db.cursor()
-    # Creates the user database: username|password|decks
-    command = "CREATE TABLE IF NOT EXISTS pokemon (name TEXT PRIMARY KEY, element TEXT NOT NULL, image TEXT);"
-    c.execute(command)
-    db.commit() #save changes
-    db.close()  #close database
 
 ######################################################################################################
 ######################################################################################################
@@ -158,6 +140,41 @@ def register(user_username, user_password1, user_password2):
     db.close()  #close database
     return(num)
 
+def decks(decks_username, decks_deckname):
+    # RETURNS:
+    # -1 for existing username
+    # -2 for passwords do not match
+    # -3 for password not over 5 characters
+    # if valid returns userID
+    #==============
+    # checks if username exists or passwords incorrect then makes new user
+    DB_FILE="database/databases.db"
+    db = sqlite3.connect(DB_FILE)
+    c = db.cursor()
+    #c.execute(''' SELECT count(name) FROM sqlite_master WHERE type='table' AND name='decks' ''')
+    checkDeck = "SELECT name FROM decks WHERE username='" + decks_username + "';"
+    data = c.execute(checkUsername)
+    for row in data:
+        if (user_username == row[0]):
+            return(-1)
+    # PASSWORDS MATCH?
+    if (user_password1 != user_password2):
+        return(-2)
+    # PASSWORD LENGTH?
+    if (len(user_password1) < 5):
+        return(-3)
+    # ADD USER TO DATABASE !
+    getNextID = "SELECT userID FROM users;"
+    data = c.execute(getNextID)
+    num = 1;
+    for ID in data:
+        num += 1
+    command = "INSERT INTO users VALUES (" + str(num) + ",'" + user_username + "', '" + user_password1 + "');"
+    c.execute(command)
+
+    db.commit() #save changes
+    db.close()  #close database
+    return(num)
 ######################################################################################################
 ######################################################################################################
 ######################################################################################################

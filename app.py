@@ -22,6 +22,7 @@ DB_FILE="database/databases.db"
 app = Flask(__name__)
 app.secret_key = os.urandom(32) #generates secret key for session
 
+nameDecks = ""
 decknumber = 0
 @app.route("/")
 def dock():
@@ -64,19 +65,45 @@ def register():
             return redirect(url_for("main"))
     return render_template('register.html', errorMessage=errorMessage)
 
+
+@app.route("/nameDeck", methods=["GET", "POST"])
+def nameDeck():
+    #print(111111111111111111111111111111111111111111111111111111111111111111111111111111111)
+    if(request.form):
+        psrint(111111111111111111111111111111111111111111111111111111111111111111111111111111111)
+        global nameDecks
+        nameDecks = request.form["deckName"]
+                 # assign password key in session to inputted
+    return render_template("nameDeck.html", user=session['username'])
+
+
 @app.route("/main")
 def main():
     return render_template("main.html", user=session['username'])
 
+@app.route('/addtodeck/<deck_id>/<card_id>')
+def add_to_deck(deck_id, card_id):
+    pass
 
-@app.route("/makeDeck")
+@app.route('/removefromdeck/<deck_id>/<card_id>')
+def removefromdeck(deck_id, card_id):
+    pass
+
+@app.route('/editdeck/<deck_id>')
+def edit_deck(deck_id):
+    pass
+
+@app.route("/makeDeck", methods = ["POST"])
 def makeDeck():
+    global nameDecks
+    print(nameDecks)
     with sqlite3.connect(DB_FILE) as db:
         c = db.cursor()
         c.execute('SELECT * FROM chars')
         players = c.fetchall()
+        deck = []
     #we also need to make a deck maker string, that we will evenetually loop through and add to the decks database
-    return render_template("makeDeck.html",  players = players)
+    return render_template("makeDeck.html",  players = players, deck = deck)
 
 @app.route("/chooseDeck")
 def chooseDeck():

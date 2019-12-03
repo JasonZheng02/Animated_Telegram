@@ -33,7 +33,11 @@
     {% else %}
     <td>N/A</td>
     {% endif %}
-    
+    {%if i[0] in deck%}
+    <td><a href="" role="btn" class="btn btn-danger">Remove from deck</a></td>
+    {% else %}
+    <td><a href="/addtodeck/{{deck_id}}/{{card_id}}" role="btn" class="btn btn-success">Add to deck</a></td>
+    {% endif %}
 
 
 
