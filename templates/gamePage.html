@@ -35,10 +35,11 @@
 
         <form action="/gamePage", method="POST">
             {% for character in yourDeck: %}
-
+                {{character}}
                 <input type="radio" name={{character}}>
+
+                <br>
             {% endfor %}
-            <input type="radio" name=character>
 
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>

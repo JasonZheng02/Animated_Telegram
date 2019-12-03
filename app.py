@@ -194,7 +194,11 @@ def gamePage():
 
     print('****************************')
     print(request.form.get("choice1"))
-    print(request.form)
+    print(request.form.get("person1"))
+    print(request.form.get("person2"))
+    print(request.form.get("person3"))
+
+    if (yourLives == 0):
 
 
 
