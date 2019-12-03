@@ -70,16 +70,27 @@ def register():
 
 @app.route("/nameDeck", methods=["GET", "POST"])
 def nameDeck():
+    errorMessage = "Don't pick an existing name!"
     #print(111111111111111111111111111111111111111111111111111111111111111111111111111111111)
     global currentDeck
+    global nameDecks
     currentDeck = []
     if(request.form):
-        print(111111111111111111111111111111111111111111111111111111111111111111111111111111111)
-        global nameDecks
+        #print(111111111111111111111111111111111111111111111111111111111111111111111111111111111)
+        with sqlite3.connect(DB_FILE) as db:
+            c = db.cursor()
+            c.execute("SELECT deckname FROM decks WHERE user = '" + session["username"] + "' AND deckname = '" +  request.form["deckName"] + "';")
+            if (not len(c.fetchall()) == 0) or request.form["deckName"] == "":
+                errorMessage = "Name Taken or empty form"
+                print("11111111111111111111111")
+                return render_template("nameDeck.html", user=session['username'], errorMessage = errorMessage)
         nameDecks = request.form["deckName"]
+        #print(nameDecks + "77777777777777777777777777777777777777777777777777777777777777777777777777777777777777777")
                  # assign password key in session to inputted
-    return render_template("nameDeck.html", user=session['username'])
 
+        print("2222222222222222")
+        return render_template("makeDeck.html", user=session['username'])
+    return render_template("nameDeck.html", user=session['username'], errorMessage = errorMessage)
 
 @app.route("/main")
 def main():
