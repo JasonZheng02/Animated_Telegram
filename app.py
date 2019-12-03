@@ -24,6 +24,8 @@ app.secret_key = os.urandom(32) #generates secret key for session
 
 nameDecks = ""
 decknumber = 0
+currentDeck=[]
+
 @app.route("/")
 def dock():
     return render_template("login.html")
@@ -69,8 +71,10 @@ def register():
 @app.route("/nameDeck", methods=["GET", "POST"])
 def nameDeck():
     #print(111111111111111111111111111111111111111111111111111111111111111111111111111111111)
+    global currentDeck
+    currentDeck = []
     if(request.form):
-        psrint(111111111111111111111111111111111111111111111111111111111111111111111111111111111)
+        print(111111111111111111111111111111111111111111111111111111111111111111111111111111111)
         global nameDecks
         nameDecks = request.form["deckName"]
                  # assign password key in session to inputted
@@ -81,29 +85,40 @@ def nameDeck():
 def main():
     return render_template("main.html", user=session['username'])
 
-@app.route('/addtodeck/<deck_id>/<card_id>')
-def add_to_deck(deck_id, card_id):
-    pass
+@app.route('/addtodeck/<deck_name>/<card_name>', methods = ["GET","POST"])
+def add_to_deck(deck_name, card_name):
+    global currentDeck
+    if(len(currentDeck)>15):
+        return redirect('/makeDeck')
+    currentDeck.append(card_name)
+    return redirect('/makeDeck')
 
-@app.route('/removefromdeck/<deck_id>/<card_id>')
-def removefromdeck(deck_id, card_id):
-    pass
+@app.route('/removefromdeck/<deck_name>/<card_name>')
+def removefromdeck(deck_name, card_name):
+    global currentDeck
+    if(len(currentDeck)<1):
+        return render_template('/makeDeck')
+    currentDeck.remove(card_name)
+    return render_template('/makeDeck')
 
-@app.route('/editdeck/<deck_id>')
-def edit_deck(deck_id):
-    pass
+@app.route('/editdeck/<deck_name>')
+def edit_deck(deck_name):
+    global currentDeck
+    currentDeck = deckName
+    return render_template('/makeDeck')
 
-@app.route("/makeDeck", methods = ["POST"])
+@app.route("/makeDeck", methods = ["POST", "GET"])
 def makeDeck():
     global nameDecks
     print(nameDecks)
+    global currentDeck
     with sqlite3.connect(DB_FILE) as db:
         c = db.cursor()
         c.execute('SELECT * FROM chars')
         players = c.fetchall()
-        deck = []
+
     #we also need to make a deck maker string, that we will evenetually loop through and add to the decks database
-    return render_template("makeDeck.html",  players = players, deck = deck)
+    return render_template("makeDeck.html",  players = players, deck = currentDeck)
 
 @app.route("/chooseDeck")
 def chooseDeck():
@@ -125,4 +140,4 @@ def playScreen():
 
 if __name__ == "__main__":
 	app.debug = True
-	app.run()
+	app.run(host="0.0.0.0", port = '5000', debug = True)

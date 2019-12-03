@@ -153,24 +153,15 @@ def decks(decks_username, decks_deckname):
     c = db.cursor()
     #c.execute(''' SELECT count(name) FROM sqlite_master WHERE type='table' AND name='decks' ''')
     checkDeck = "SELECT name FROM decks WHERE username='" + decks_username + "';"
-    data = c.execute(checkUsername)
+    data = c.execute(checkDeck)
     for row in data:
-        if (user_username == row[0]):
+        if (decks_deckname in row):
             return(-1)
     # PASSWORDS MATCH?
-    if (user_password1 != user_password2):
+    if(decks_deckname == ""):
         return(-2)
-    # PASSWORD LENGTH?
-    if (len(user_password1) < 5):
-        return(-3)
     # ADD USER TO DATABASE !
-    getNextID = "SELECT userID FROM users;"
-    data = c.execute(getNextID)
-    num = 1;
-    for ID in data:
-        num += 1
-    command = "INSERT INTO users VALUES (" + str(num) + ",'" + user_username + "', '" + user_password1 + "');"
-    c.execute(command)
+
 
     db.commit() #save changes
     db.close()  #close database
@@ -179,31 +170,7 @@ def decks(decks_username, decks_deckname):
 ######################################################################################################
 ######################################################################################################
 
-def addHockey(name,health,attack,image):
-    #INSERT INTO hockey VALUES ('name', 100, 25, 'img');
-    DB_FILE="database/databases.db"
-    db = sqlite3.connect(DB_FILE)
-    c = db.cursor()
-    #Adding hockey players
-    addHockey = "INSERT INTO hockey VALUES (\'" + name + "\', " + str(health) + ", " + str(attack) + ", \'" + image + "\'" + ");"
-    data = c.execute(addHockey)
-    db.commit() #save changes
-    db.close()  #close database
-    print( "Inserted: " + name + ", " + str(health) + ", " + str(attack) + ", " + image)
-    return(True)
 
-def addPokemon(name,element,image):
-    #INSERT INTO hockey VALUES ('name', 100, 25, 'img');
-    DB_FILE="database/databases.db"
-    db = sqlite3.connect(DB_FILE)
-    c = db.cursor()
-    #Adding hockey players
-    addPokemon = "INSERT INTO pokemon VALUES (\'" + name + "\', \'" + element + "\', \'" + image + "\'" + ");"
-    data = c.execute(addPokemon)
-    db.commit() #save changes
-    db.close()  #close database
-    print( "Inserted: " + name + ", " + element + ", " + image)
-    return(True)
 
 ######################################################################################################
 ######################################################################################################
