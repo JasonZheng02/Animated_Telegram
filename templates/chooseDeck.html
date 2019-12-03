@@ -2,8 +2,20 @@
 {% block title %} Choose Deck {% endblock %}
 {% block body %}
 <h1> Choose Deck </h1>
-    <form action = "/playScreen">
-      <input type="submit" value="Done">
-    </form>
+<table class="table">
 
+  <thead>
+    <tr>
+    <th scope="col">Deck Name</th>
+    <th scope="col">Choose</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for name in players %}
+  <tr>
+    <th>{{name[1]}} </th>
+    <th><a href="/chooser/{{name}}" role="btn" class="btn btn-success">Choose this Deck</a></th>
+  <tr>
+  {% endfor %}
+  </tbody>
 {% endblock %}

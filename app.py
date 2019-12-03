@@ -155,7 +155,14 @@ def makeDeck():
 
 @app.route("/chooseDeck")
 def chooseDeck():
-    return render_template("chooseDeck.html")
+    with sqlite3.connect(DB_FILE) as db:
+        c = db.cursor()
+        c.execute("SELECT * FROM decks WHERE user = '" + session["username"] + "';")
+        stuff = c.fetchall()
+        names = []
+        for i in stuff:
+            names.append(stuff[1])
+        return render_template("chooseDeck.html", players = names)
 
 @app.route("/victory")
 def victory():
