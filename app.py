@@ -168,6 +168,54 @@ def defeat():
 def playScreen():
     return render_template("playScreen.html")
 
+@app.route("/gamePage")
+def playGame():
+
+    yourLives = 3
+    compLives = 3
+
+    db = sqlite3.connect(DB_FILE)
+    c = db.cursor()
+    command = "SELECT * FROM chars;"
+    c.execute(command)
+    computerDeck = c.fetchall()
+
+    if (request.form): #If anything submitted, then go to battle page
+        yourCard = computerDeck[random.randint(0,50)] #chooseCard(userDeck)
+        #removeCard(userDeck, yourCard)
+        compCard = computerDeck[random.randint(0,50)]
+        yourAttack = yourCard[2] #yourCard[1] +
+        if (yourAttack > random.randint(0,400)):
+            battle = True
+            compLives -= 1
+        else:
+            battle = False
+            yourLives -= 1
+        ######
+        if (battle == True):
+            return render_template('gamePage.html',
+                #yourDeck = userDeck
+                yourLives = yourLives,
+                compLives = compLives,
+                yourCard = yourCard,
+                compCard = compCard,
+                message = "YOU WON!")
+        else:
+            return render_template('gamePage.html',
+                #yourDeck = userDeck
+                yourLives = yourLives,
+                compLives = compLives,
+                yourCard = yourCard,
+                compCard = compCard,
+                message = "YOU LOST!")
+    else:
+        return render_template('gamePage.html',
+            #yourDeck = userDeck
+            yourLives = yourLives,
+            compLives = compLives,
+            yourCard = None,
+            compCard = None,
+            message = None)
 
 
 if __name__ == "__main__":

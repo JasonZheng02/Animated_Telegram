@@ -158,31 +158,53 @@ def defeat():
 def playScreen():
     return render_template("playScreen.html")
 
-global yourLives
-yourLives = 3
-global compLives
-compLives = 3
+def playGame():
 
-def game(userDeck):
+    yourLives = 3
+    compLives = 3
+
     db = sqlite3.connect(DB_FILE)
     c = db.cursor()
     command = "SELECT * FROM chars;"
     c.execute(command)
     computerDeck = c.fetchall()
 
-    while((yourLives > 0) or (compLives > 0)):
-        yourCard = computerDeck[random.randint(0,54)] #chooseCard(userDeck)
+    if (Request.form): #If anything submitted, then go to battle page
+        yourCard = computerDeck[random.randint(0,50)] #chooseCard(userDeck)
         #removeCard(userDeck, yourCard)
-        compCard = computerDeck[random.randint(0,54)]
+        compCard = computerDeck[random.randint(0,50)]
         yourAttack = yourCard[2] #yourCard[1] +
-
         if (yourAttack > random.randint(0,400)):
+            battle = True
             compLives -= 1
+        else:
+            battle = False
+            yourLives -= 1
+        ######
+        if (battle == True):
+            return render_template('gamePage.html',
+                #yourDeck = userDeck
+                yourLives = yourLives,
+                compLives = compLives,
+                yourCard = yourCard,
+                compCard = compCard,
+                message = "YOU WON!")
+        else:
+            return render_template('gamePage.html',
+                #yourDeck = userDeck
+                yourLives = yourLives,
+                compLives = compLives,
+                yourCard = yourCard,
+                compCard = compCard,
+                message = "YOU LOST!")
+    else:
+        return render_template('gamePage.html',
+            #yourDeck = userDeck
+            yourLives = yourLives,
+            compLives = compLives,
+            yourCard = None,
+            compCard = None,
+            message = None)
 
-        print(compLives)
-        return True
 
-    return(True)
-
-
-game( 1)
+playGame(3,3)
