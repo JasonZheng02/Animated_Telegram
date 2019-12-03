@@ -104,8 +104,29 @@ def removefromdeck(deck_name, card_name):
 @app.route('/editdeck/<deck_name>')
 def edit_deck(deck_name):
     global currentDeck
-    currentDeck = deckName
+    #currentDeck = deckName
     return redirect('/makeDeck')
+
+@app.route('/newDeck')
+def newDeck():
+    global currentDeck
+    print(currentDeck)
+    temp = [session["username"], nameDecks]
+    #ok we have to add this to the database now
+    for i in currentDeck:
+        temp.append(i)
+    b = tuple(temp)
+    print(b)
+    #I WILL MOVE THE BELOW FUNCTION TO THE DB.PY file after it is finalized
+    DB_FILE="database/databases.db"
+    with sqlite3.connect(DB_FILE) as db:
+        c = db.cursor()
+        #this will be a useful string
+        #17 entries, all the chars + user and deckName a the front
+
+        c.execute("INSERT INTO decks VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", b)
+        print(c.fetchall())
+    return redirect('/main')
 
 @app.route("/makeDeck", methods = ["POST", "GET"])
 def makeDeck():

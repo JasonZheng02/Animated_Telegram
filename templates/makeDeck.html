@@ -46,12 +46,10 @@
 </tbody>
 </table>
 {%if l == 15 %}
-<form action = "/main">
-  <input type="submit" value="Done">
-</form>
+<a href="/newDeck" role="btn" class="btn btn-success">Finish</a>
 {% else %}
 <form action = "/main">
-  <input type="submit" value="Done" disabled>
+  <input type="submit" value="Finish" disabled>
 </form>
 {% endif %}
 <table class="table">
