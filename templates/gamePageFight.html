@@ -21,11 +21,12 @@
     </div>
 
     <div>
-        {{compCard}}
-
+        {{compCard}} <br>
+        {{message}} <br>
         {{yourCard}}
 
-        {{message}}
+        <a href="/gamePage" role="btn" class="btn btn-success"> Next Round</a>
+
     </div>
 
     <div>
@@ -46,9 +47,7 @@
   {% for player in g %}
   <tr>
     <th>{{yourDeck[player][0]}} </th>
-    <th>
-      <a href="/choosePlayer/{{player}}" role="btn" class="btn btn-success"> Choose this Player</a>
-    </th>
+
   <tr>
   {% endfor %}
   </tbody>

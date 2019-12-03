@@ -26,6 +26,9 @@ app.secret_key = os.urandom(32) #generates secret key for session
 nameDecks = ""
 decknumber = 0
 currentDeck=[]
+yourDeck = []
+yourLives = 3
+compLives = 3
 
 @app.route("/")
 def dock():
@@ -95,7 +98,14 @@ def nameDeck():
 
 @app.route("/main")
 def main():
+    findDeck('crazy')
     return render_template("main.html", user=session['username'])
+
+@app.route('/gameDeck/<deck_name>')
+def gameDeck(deck_name):
+    global yourDeck
+    yourDeck = findDeck(deck_name)
+    return redirect('/gamePage')
 
 @app.route('/addtodeck/<deck_name>/<card_name>', methods = ["GET","POST"])
 def add_to_deck(deck_name, card_name):
@@ -167,6 +177,22 @@ def chooseDeck():
             names.append(i)
         return render_template("chooseDeck.html", players = names)
 
+def findDeck(name):
+    with sqlite3.connect(DB_FILE) as db:
+        c = db.cursor()
+        c.execute("SELECT * FROM decks WHERE user = '" + session["username"] + "'" + "AND deckname = '" + name + "';")
+        stuff = c.fetchall()
+        #stuff = stuff[2:]
+        listOfNames = stuff[0][2:]
+        finalDeck = []
+        for person in listOfNames:
+            c.execute("SELECT * FROM chars WHERE name = '" + person + "';")
+            temp = c.fetchall()[0]
+            finalDeck.append(temp)
+        print('***************')
+        print(finalDeck)
+        return finalDeck
+
 @app.route("/victory")
 def victory():
     return render_template("victory.html")
@@ -181,10 +207,10 @@ def playScreen():
 
 @app.route("/gamePage", methods=["GET", "POST"])
 def gamePage():
-
-    yourLives = 3
-    compLives = 3
-    yourDeck = ['person1','person2','person3']
+    global yourLives
+    global compLives
+    global yourDeck
+    global yourCard
 
     db = sqlite3.connect(DB_FILE)
     c = db.cursor()
@@ -192,50 +218,82 @@ def gamePage():
     c.execute(command)
     computerDeck = c.fetchall()
 
-    print('****************************')
-    print(request.form.get("choice1"))
-    print(request.form.get("person1"))
-    print(request.form.get("person2"))
-    print(request.form.get("person3"))
+    print("LOOK AT THIS !!!!")
 
     if (yourLives == 0):
+        yourLives = 3
+        compLives = 3
+        return render_template('defeat.html')
+    if (compLives == 0):
+        yourLives = 3
+        compLives = 3
+        return render_template('victory.html')
+
+    return render_template('gamePage.html',
+        yourDeck = yourDeck,
+        g = range(len(yourDeck)),
+        yourLives = yourLives,
+        compLives = compLives,
+        message = "NOTHING HERE")
 
 
+@app.route('/gamePageFight')
+def gamePageFight():
 
-    if (request.form): #If anything submitted, then go to battle page
-        yourCard = computerDeck[random.randint(0,50)] #chooseCard(userDeck)
-        #removeCard(userDeck, yourCard)
-        compCard = computerDeck[random.randint(0,50)]
-        yourAttack = yourCard[2] #yourCard[1] +
-        if (yourAttack > random.randint(0,400)):
-            battle = True
-            compLives -= 1
-        else:
-            battle = False
-            yourLives -= 1
-        ######
-        if (battle == True):
-            return render_template('gamePage.html',
-                yourDeck = yourDeck,
-                yourLives = yourLives,
-                compLives = compLives,
-                yourCard = yourCard,
-                compCard = compCard,
-                message = "YOU WON!")
-        else:
-            return render_template('gamePage.html',
-                yourDeck = yourDeck,
-                yourLives = yourLives,
-                compLives = compLives,
-                yourCard = yourCard,
-                compCard = compCard,
-                message = "YOU LOST!")
+    global yourLives
+    global compLives
+    global yourDeck
+    global yourCard
+
+    db = sqlite3.connect(DB_FILE)
+    c = db.cursor()
+    command = "SELECT * FROM chars;"
+    c.execute(command)
+    computerDeck = c.fetchall()
+
+    yourCard #chooseCard(userDeck)
+    yourAttack = yourCard[2] #yourCard[1] +
+    compCard = computerDeck[random.randint(0,50)]
+    if (yourAttack > random.randint(0,400)):
+        battle = True
+        compLives -= 1
     else:
-        return render_template('gamePage.html',
+        battle = False
+        yourLives -= 1
+    ######
+    if (battle == True):
+        return render_template('gamePageFight.html',
             yourDeck = yourDeck,
+            g = range(len(yourDeck)),
             yourLives = yourLives,
             compLives = compLives,
-            message = "NOTHING HERE")
+            yourCard = yourCard,
+            compCard = compCard,
+            message = "YOU WON!")
+    else:
+        return render_template('gamePageFight.html',
+            yourDeck = yourDeck,
+            g = range(len(yourDeck)),
+            yourLives = yourLives,
+            compLives = compLives,
+            yourCard = yourCard,
+            compCard = compCard,
+            message = "YOU LOST!")
+
+
+yourCard = ()
+
+@app.route('/choosePlayer/<tup>')
+def choosePlayer(tup):
+    print(tup)
+    player = int(tup)
+    print(player)
+    global yourCard
+    yourCard = yourDeck[player]
+    print(yourCard)
+    yourDeck.remove(yourDeck[int(tup)])
+    return(redirect("/gamePageFight"))
+
 
 
 if __name__ == "__main__":
