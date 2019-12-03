@@ -97,15 +97,15 @@ def add_to_deck(deck_name, card_name):
 def removefromdeck(deck_name, card_name):
     global currentDeck
     if(len(currentDeck)<1):
-        return render_template('/makeDeck')
+        return redirect('/makeDeck')
     currentDeck.remove(card_name)
-    return render_template('/makeDeck')
+    return redirect('/makeDeck')
 
 @app.route('/editdeck/<deck_name>')
 def edit_deck(deck_name):
     global currentDeck
     currentDeck = deckName
-    return render_template('/makeDeck')
+    return redirect('/makeDeck')
 
 @app.route("/makeDeck", methods = ["POST", "GET"])
 def makeDeck():
