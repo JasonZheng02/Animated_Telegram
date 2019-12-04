@@ -251,18 +251,14 @@ def gamePageFight():
     c.execute(command)
     computerDeck = c.fetchall()
 
-    print(yourCard) #chooseCard(userDeck)
-    yourAttack = yourCard[2] #yourCard[1] +
-    compCard = computerDeck[random.randint(0,50)]
+    print(yourCard[3]) #chooseCard(userDeck)
+
+    compCard = computerDeck[random.randint(0,54)]
     #####
-    if (yourAttack > random.randint(0,400)):
-        battle = True
-        compLives -= 1
-    else:
-        battle = False
-        yourLives -= 1
+    print(compCard[3])
     ########################
     #FIGHT
+    battle = True
     if (not yourCard[3] == "hockey") and (compCard[3] == "hockey"):
         battle == True
     if (not compCard[3] == "hockey") and (yourCard[3] == "hockey"):
@@ -316,6 +312,7 @@ def gamePageFight():
                  battle = random.choose([True, False])
 
     if (battle == True):
+        compLives -= 1
         return render_template('gamePageFight.html',
             yourDeck = yourDeck,
             g = random.sample(population = range(len(yourDeck)),k=3),
@@ -325,6 +322,7 @@ def gamePageFight():
             compCard = compCard,
             message = "YOU WON!")
     else:
+        yourLives -= 1
         return render_template('gamePageFight.html',
             yourDeck = yourDeck,
             g = random.sample(population = range(len(yourDeck)),k=3),
