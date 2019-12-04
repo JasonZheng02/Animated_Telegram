@@ -3,12 +3,12 @@ Jude: In response to the design doc feedback,I created a full and finished compo
 minimum viable product section.
 
 rizzoJ -- 2019-11-20 16:45
-Jude: I fleshed our the login mechanics for the siteusing the same techniques as I did with the blog, as well as updated the 
+Jude: I fleshed our the login mechanics for the siteusing the same techniques as I did with the blog, as well as updated the
 component map.
 
 Ego and programming Response:
 1. Personally, we don't have that much experience only being highschool students, but even the CS dojo and the QAF are technically
-informal groups that have been created due to the complextiy and variation of programming. These tend to form because 
+informal groups that have been created due to the complextiy and variation of programming. These tend to form because
 each individual in the social structure may have holes in their knowledge but as a group, they can collectively fix all of that.
 2.As far as I know, the terminal systems (Mac and Ubuntu) don't have built in communication, instead from our experience
 external messneging communication is used.
@@ -36,3 +36,24 @@ tanM -- 2019-11-25 14:38
 - If we finish ahead of schedule, we will add more functions to our game
 to make it more fun.
 
+
+rizzoJ -- 2019 12-01 22:00
+1. Added Appropriate CSS and HTML
+2. Added all the players and pokemon to the database
+3. Fixed setupdb.py
+
+rizzoJ -- 2019 12-02  17:00
+1.Fully made the add and remove card pages
+2.Made nameDeck.HTML
+3.Made 2 new HTML routes, as well as a checker for name
+4.Fixed the deck database
+5.Started working on fight mechanics
+
+
+rizzoJ -- 2019 12-03
+1. Fixed any mishaps in the character database
+2. worked on chooseDeck
+3. Made more routes in order to select cards appropriately
+4. Found the bug with c.fetchall()
+5. Made and finished the fight function
+6. Fixed game functions with lives
