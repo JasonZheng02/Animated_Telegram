@@ -9,41 +9,53 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 
-<div style ="background:white; text-align:center" class="jumbotron jumbotron-fluid" >
-<h1> Main Page </h1>
-    Welcome {{user}}! <br>
-
-<body>
 
 
+
+<body style="background: #80608E;">
+
+<div style ="background: #80608E; text-align:center" class="jumbotron" style="background-size: 100%;" >
+    <div class="container">
+    <h1> Welcome {{user}}! </h1>
+     <br><br><br>
     <div class="row">
       <div class="col-sm-6">
-        <div class="card">
-          <div class="card-body">
+        <div class="card" >
+          <span class="border border-dark">
+          <img src="../static/Images/Swords.jpg" class="card-img-top" alt="fight image" style="height:300px; width:300px;">
+          <div class="card-body" style="background: #26E382; align-items: center;">
             <h5 class="card-title">Play A Round!</h5>
             <p class="card-text">Draw and pit your cards against our AI!</p>
             <form action = "/chooseDeck">
               <input type="submit" class="btn btn-primary" value="Play">
             </form>
           </div>
+          </span>
         </div>
       </div>
       <div class="col-sm-6">
         <div class="card">
-          <div class="card-body">
+          <span class="border border-dark">
+        <img src={{img0}} class="card-img-top" alt="fight image" style="height:300px; width:160px;">
+        <img src={{img1}} class="card-img-top" alt="fight image" style="height:300px; width:160px;">
+        <img src={{img2}} class="card-img-top" alt="fight image" style="height:300px; width:160px;">
+          <div class="card-body" style="background: #18CFCC">
             <h5 class="card-title">Make your deck!</h5>
             <p class="card-text">Build your ultimate deck!</p>
             <form action = "/nameDeck">
               <input type="submit" class="btn btn-primary" value="Make New Deck">
             </form>
           </div>
+          </span>
         </div>
       </div>
     </div>
+
+    </div>
+</div>
+
+
 </body>
-
-
-
 
 
 
