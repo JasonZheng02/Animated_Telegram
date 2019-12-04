@@ -1,6 +1,12 @@
+zhengJ -- 2019-11-17
+Added Roles and Description of the game to the design doc
+
 rizzoJ -- 2019-11-19 19:12
 Jude: In response to the design doc feedback,I created a full and finished component map and added more details to the
 minimum viable product section.
+
+zhengJ -- 2019-11-19
+Added some flask routes
 
 rizzoJ -- 2019-11-20 16:45
 Jude: I fleshed our the login mechanics for the siteusing the same techniques as I did with the blog, as well as updated the
@@ -23,6 +29,9 @@ Our group will stop referring to programs as "our program" and try to facilitate
 program. In addition, we will try to up our use of the cs dojo and QAF to further use the informal social structures to aid
 in our programming
 
+zhengJ -- 2019-11-22
+Added templates, some more flask routes, and flag
+
 tanM -- 2019-11-23 21:34
 - Finished login and register functions
 - Finished database for user info
@@ -36,6 +45,11 @@ tanM -- 2019-11-25 14:38
 - If we finish ahead of schedule, we will add more functions to our game
 to make it more fun.
 
+zhengJ -- 2019-11-25
+Added list of NHL player names to makeDeck template
+
+zhengJ -- 2019-11-27
+Added pokemon data
 
 rizzoJ -- 2019 12-01 22:00
 1. Added Appropriate CSS and HTML
@@ -49,6 +63,11 @@ rizzoJ -- 2019 12-02  17:00
 4.Fixed the deck database
 5.Started working on fight mechanics
 
+zhengJ -- 2019-12-02
+Added images of the players and pokemon
+
+zhengJ -- 2019-12-03
+Some bootstrap
 
 rizzoJ -- 2019 12-03
 1. Fixed any mishaps in the character database
