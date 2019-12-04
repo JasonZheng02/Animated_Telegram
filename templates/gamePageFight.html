@@ -21,12 +21,26 @@
     </div>
 
     <div>
-        {{compCard}} <br>
+      <div class="card mx-2 mb-3" style="width: 18rem;">
+        <img src={{url_for('static', filename = 'Images/NHL/' + compCard[0] + '.jpg')}} class="card-img-top" alt="Need to add image">
+        <div class="card-body">
+          <h5 class="card-title">{{compCard[0]}}</h5>
+          <p class="card-text">Attack: {{compCard[1]}}</p>
+          <p class="card-text">Defense: {{compCard[2]}}</p>
+        </div>
+      </div> <br>
         {{message}} <br>
-        {{yourCard}}
+        <div class="card mx-2 mb-3" style="width: 18rem;">
+          <img src={{url_for('static', filename = 'Images/NHL/' + yourCard[0] + '.jpg')}} class="card-img-top" alt="Need to add image">
+          <div class="card-body">
+            <h5 class="card-title">{{yourCard[0]}}</h5>
+            <p class="card-text">Attack: {{yourCard[1]}}</p>
+            <p class="card-text">Defense: {{yourCard[2]}}</p>
+          </div>
+        </div>
   </div>
 
-      <h1>  <a href="/gamePage" role="btn" class="btn btn-success"> Next Round</a>  </h1> 
+      <h1>  <a href="/gamePage" role="btn" class="btn btn-success"> Next Round</a>  </h1>
 
 
 
