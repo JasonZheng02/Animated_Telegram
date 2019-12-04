@@ -9,10 +9,10 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 
-<body>
-  <h1 style="text-align:center; background:white;" class = "jumbotron"> Name Your Deck </h1>
+<body style ="background: #6d65ff;">
+  <h1 style="text-align:center; background:#ffb765;" class = "jumbotron"> Name Your Deck </h1>
   <form action='/nameDeck' method="POST">
-    <input type="username" class="form-control"placeholder="Name your Deck" style="text-align:center;" name="deckName">
+    <input type="username" class="form-control"placeholder="Name your Deck" style="text-align:center; background: #ffb765" name="deckName">
     <button type="submit" style="display: block; max-width: 300px; margin: auto;" class="btn btn-success">Submit</button>
   </form>
   <p style="text-align:center;">{{errorMessage}}</p>

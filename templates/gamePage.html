@@ -1,53 +1,41 @@
 {% extends "base.html" %}
 {% block title %} Main Page {% endblock %}
 {% block body %}
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-<!-- Bootstrap CSS -->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-</head>
 
 <div style ="background:white; text-align:center" class="jumbotron jumbotron-fluid" >
 <h1> [BATTLE] </h1>
-
-<body>
-
-    <div>
-
-
+    <p>
       Computer Lives = {{compLives}}
-    </div>
-
-    <div>
-
-    </div>
-
-    <div>
-
+    </p>
+	<p>
         Your Lives = {{yourLives}}
-
-
+	</p>
         <h1> Choose Card </h1>
-<table class="table">
-
-  <thead>
-    <tr>
-    <th scope="col">Character</th>
-    <th scope="col">Choose</th>
-    </tr>
-  </thead>
-  <tbody>
-  {% for player in g %}
-  <tr>
-    <th>{{yourDeck[player][0]}} </th>
-    <th>
+</div>
+  <div class = "container-fluid">
+	<div class = "row mt-5 justify-content-center">
+	{% for player in g %}
+	<div class="card mx-2 mb-3" style="width: 18rem;">
+	<p>
       <a href="/choosePlayer/{{player}}" role="btn" class="btn btn-success"> Choose this Player</a>
-    </th>
-  <tr>
-  {% endfor %}
-  </tbody>
+    </p>
+	{% if yourDeck[player][3] == "hockey" %}
+      <img src={{url_for('static', filename = 'Images/NHL/' + yourDeck[player][0] + '.jpg')}} class="card-img-top" alt="Need to add image">
+      <div class="card-body">
+        <h5 class="card-title">{{yourDeck[player][0]}}</h5>
+        <p class="card-text">Attack: {{yourDeck[player][1]}}</p>
+        <p class="card-text">Defense: {{yourDeck[player][2]}}</p>
+      </div>
+	{% else %}
+	<img src={{url_for('static', filename = 'Images/Pokemon/' + yourDeck[player][0] + '.jpg')}} class="card-img-top" alt="Need to add image">
+      <div class="card-body">
+        <h5 class="card-title">{{yourDeck[player][0]}}</h5>
+        <p class="card-text">Type: {{yourDeck[player][3]}}</p>
+      </div>
+	{% endif %}
+	</div>
+	  {% endfor %}
+	</div>
     </div>
 
 
