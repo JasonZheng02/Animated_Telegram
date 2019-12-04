@@ -99,7 +99,18 @@ def nameDeck():
 @app.route("/main")
 def main():
     findDeck('crazy')
-    return render_template("main.html", user=session['username'])
+    hdr = headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.3'}
+    req = Request("https://deckofcardsapi.com/api/deck/new/draw/?count=3", headers=hdr)
+    link = urlopen(req)
+    response = link.read()
+    data = json.loads( response )
+    img0 = data["cards"][0]["images"]["png"]
+    print(img0)
+    print("IMAGE0 ^")
+    img1 = data["cards"][1]["images"]["png"]
+    img2 = data["cards"][2]["images"]["png"]
+
+    return render_template("main.html", user=session['username'], img0 = img0, img1=img1, img2=img2)
 
 @app.route('/gameDeck/<deck_name>')
 def gameDeck(deck_name):
