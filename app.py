@@ -96,7 +96,7 @@ def nameDeck():
         return redirect('/makeDeck')
     return render_template("nameDeck.html", user=session['username'], errorMessage = errorMessage)
 
-@app.route("/main")
+@app.route("/main", methods = ["GET","POST"])
 def main():
     findDeck('crazy')
     hdr = headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.3'}
