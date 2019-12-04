@@ -63,10 +63,15 @@ rizzoJ -- 2019 12-02  17:00
 4.Fixed the deck database
 5.Started working on fight mechanics
 
-zhengJ -- 2019-12-02
+zhengJ -- 2019-12-02 12:30
 Added images of the players and pokemon
 
-zhengJ -- 2019-12-03
+tanM -- 2019-12-02 16:00
+- Added colors for pages
+- Fixed fight function
+- Added tutorial feature: scroll overlay, different colors
+
+zhengJ -- 2019-12-03 18:42
 Some bootstrap
 
 rizzoJ -- 2019 12-03
