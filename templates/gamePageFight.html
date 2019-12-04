@@ -24,12 +24,20 @@
 
     <div class = "row mt-5 justify-content-center">
       <div class="card mx-2 mb-3" style="width: 18rem;">
+	  {% if compCard[3] == 0 %}
         <img src={{url_for('static', filename = 'Images/NHL/' + compCard[0] + '.jpg')}} class="card-img-top" alt="Need to add image">
         <div class="card-body">
           <h5 class="card-title">{{compCard[0]}}</h5>
           <p class="card-text">Height: {{compCard[1]}}</p>
           <p class="card-text">Weight: {{compCard[2]}}</p>
         </div>
+	{% else %}
+		<img src={{url_for('static', filename = 'Images/Pokemon/' + compCard[0] + '.jpg')}} class="card-img-top" alt="Need to add image">
+        <div class="card-body">
+          <h5 class="card-title">{{compCard[0]}}</h5>
+          <p class="card-text">Type: {{compCard[3]}}</p>
+        </div>
+	{% endif %}
       </div> <br>
        <br>
        <br>
@@ -38,12 +46,20 @@
          <br>
          vs
         <div class="card mx-2 mb-3" style="width: 18rem;">
+		{% if yourCard[3] == 0 %}
           <img src={{url_for('static', filename = 'Images/NHL/' + yourCard[0] + '.jpg')}} class="card-img-top" alt="Need to add image">
           <div class="card-body">
             <h5 class="card-title">{{yourCard[0]}}</h5>
             <p class="card-text">Height: {{yourCard[1]}}</p>
             <p class="card-text">Weight: {{yourCard[2]}}</p>
           </div>
+		  {% else %}
+		  <img src={{url_for('static', filename = 'Images/Pokemon/' + yourCard[0] + '.jpg')}} class="card-img-top" alt="Need to add image">
+			<div class="card-body">
+			<h5 class="card-title">{{yourCard[0]}}</h5>
+			<p class="card-text">Type: {{yourCard[3]}}</p>
+			</div>
+		{% endif %}
         </div>
   </div>
 
