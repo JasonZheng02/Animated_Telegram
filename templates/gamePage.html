@@ -16,10 +16,10 @@
 	<div class = "row mt-5 justify-content-center">
 	{% for player in g %}
 	<div class="card mx-2 mb-3" style="width: 18rem;">
+	{% if yourDeck[player][3] == "hockey" %}
 	<p>
       <a href="/choosePlayer/{{player}}" role="btn" class="btn btn-success"> Choose this Player</a>
     </p>
-	{% if yourDeck[player][3] == "hockey" %}
       <img src={{url_for('static', filename = 'Images/NHL/' + yourDeck[player][0] + '.jpg')}} class="card-img-top" alt="Need to add image">
       <div class="card-body">
         <h5 class="card-title">{{yourDeck[player][0]}}</h5>
@@ -27,6 +27,9 @@
         <p class="card-text">Defense: {{yourDeck[player][2]}}</p>
       </div>
 	{% else %}
+	<p>
+      <a href="/choosePlayer/{{player}}" role="btn" class="btn btn-success"> Choose this Pokemon</a>
+    </p>
 	<img src={{url_for('static', filename = 'Images/Pokemon/' + yourDeck[player][0] + '.jpg')}} class="card-img-top" alt="Need to add image">
       <div class="card-body">
         <h5 class="card-title">{{yourDeck[player][0]}}</h5>
