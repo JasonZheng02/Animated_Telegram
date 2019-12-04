@@ -231,7 +231,7 @@ def gamePage():
 
     return render_template('gamePage.html',
         yourDeck = yourDeck,
-        g = range(len(yourDeck)),
+        g = random.sample(population = range(len(yourDeck)),k=3),
         yourLives = yourLives,
         compLives = compLives,
         message = "NOTHING HERE")
@@ -264,7 +264,7 @@ def gamePageFight():
     if (battle == True):
         return render_template('gamePageFight.html',
             yourDeck = yourDeck,
-            g = range(len(yourDeck)),
+            g = random.sample(population = range(len(yourDeck)),k=3),
             yourLives = yourLives,
             compLives = compLives,
             yourCard = yourCard,
@@ -273,7 +273,7 @@ def gamePageFight():
     else:
         return render_template('gamePageFight.html',
             yourDeck = yourDeck,
-            g = range(len(yourDeck)),
+            g = random.sample(population = range(len(yourDeck)),k=3),
             yourLives = yourLives,
             compLives = compLives,
             yourCard = yourCard,
