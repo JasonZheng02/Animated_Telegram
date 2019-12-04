@@ -251,16 +251,70 @@ def gamePageFight():
     c.execute(command)
     computerDeck = c.fetchall()
 
-    yourCard #chooseCard(userDeck)
+    print(yourCard) #chooseCard(userDeck)
     yourAttack = yourCard[2] #yourCard[1] +
     compCard = computerDeck[random.randint(0,50)]
+    #####
     if (yourAttack > random.randint(0,400)):
         battle = True
         compLives -= 1
     else:
         battle = False
         yourLives -= 1
-    ######
+    ########################
+    #FIGHT
+    if (not yourCard[3] == "hockey") and (compCard[3] == "hockey"):
+        battle == True
+    if (not compCard[3] == "hockey") and (yourCard[3] == "hockey"):
+        battle == False
+    ##########################
+    if(compCard[3] == "hockey" and yourCard[3] == "hockey"):
+        #weighted average time
+        compTotal = int(compCard[1].split()[0][0]) * 12 + int(compCard[1].split()[1][0]) + compCard[2]
+        yourTotal = int(yourCard[1].split()[0][0]) * 12 + int(yourCard[1].split()[1][0]) + yourCard[2]
+        if(yourTotal > random.randint(0, yourTotal + compTotal)):
+            battle = True
+        else:
+            battle = False
+    ###pokemon case
+    if not (compCard[3] == "hockey" or yourCard[3] == "hockey"):
+         ###casework
+         if yourCard[3] == "pikachu":
+             if(compCard[3] == "squirtle" or compCard[3] == "charmander"):
+                 battle = True
+             elif(compCard[3] == "turtwig" or compCard[3] == "bulbasaur"):
+                 battle = False
+             else:
+                 battle = random.choose([True, False])
+         if yourCard[3] == "charmander":
+             if(compCard[3] == "turtwig" or compCard[3] == "bulbasaur"):
+                 battle = True
+             elif(compCard[3] == "squirtle" or compCard[3] == "pikachu"):
+                 battle = False
+             else:
+                 battle = random.choose([True, False])
+         if yourCard[3] == "bulbasaur":
+             if(compCard[3] == "turtwig" or compCard[3] == "squirtle" or compCard[3] == "pikachu"):
+                 battle = True
+             elif(compCard[3] == "charmander"):
+                 battle = False
+             else:
+                 battle = random.choose([True, False])
+         if yourCard[3] == "turtwig":
+             if (compCard[3] == "squirtle" or compCard[3] == "pikachu"):
+                 battle = True
+             elif(compCard[3] == "charmander" or compCard[3] == "bulbasaur"):
+                 battle = False
+             else:
+                 battle = random.choose([True, False])
+         if yourCard[3] == "squirtle":
+             if (compCard[3] == "charmander"):
+                 battle = True
+             elif(compCard[3] == "turtwig" or compCard[3] == "bulbasaur" or compCard[3] == "pikachu"):
+                 battle = False
+             else:
+                 battle = random.choose([True, False])
+
     if (battle == True):
         return render_template('gamePageFight.html',
             yourDeck = yourDeck,
