@@ -1,10 +1,11 @@
 {% extends "base.html" %}
 {% block title %} Victory Screen {% endblock %}
 {% block body %}
-<h1> VICTORY </h1>
+<div class="text-center">
     <form action = "/main">
-      <input type="submit" value="Continue">
+      <input class = "btn btn-success" type="submit" value="Continue">
     </form>
+  </div>
 <body style = "background-image: url({{url_for('static', filename = 'Images/Victory.jpg')}}); background-repeat: no-repeat; background-size: 100vw 100vh">
 </body>
 {% endblock %}

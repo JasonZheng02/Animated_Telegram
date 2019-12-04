@@ -1,10 +1,12 @@
 {% extends "base.html" %}
 {% block title %} Defeat Screen {% endblock %}
 {% block body %}
-<h1> DEFEAT </h1>
+<div class="text-center">
     <form action = "/main">
-      <input type="submit" value="Continue">
+      <input class = "btn btn-danger" type="submit" value="Continue">
     </form>
+  </div>
 	<body style = "background-image: url({{url_for('static', filename = 'Images/Defeat.jpg')}}); background-repeat: no-repeat; background-size: 100vw 100vh">
 	</body>
+
 {% endblock %}
