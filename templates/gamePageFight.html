@@ -46,7 +46,7 @@
          <br>
          vs
         <div class="card mx-2 mb-3" style="width: 18rem;">
-		{% if yourCard[3] == 0 %}
+		{% if yourCard[3] == "hockey" %}
           <img src={{url_for('static', filename = 'Images/NHL/' + yourCard[0] + '.jpg')}} class="card-img-top" alt="Need to add image">
           <div class="card-body">
             <h5 class="card-title">{{yourCard[0]}}</h5>
