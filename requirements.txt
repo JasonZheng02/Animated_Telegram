@@ -181,7 +181,7 @@ QtPy==1.5.2
 requests==2.21.0
 requests-oauthlib==1.2.0
 rope==0.11.0
-rsa==4.0
+rsa==4.1
 ruamel-yaml==0.15.46
 scikit-image==0.14.1
 scikit-learn==0.20.1
